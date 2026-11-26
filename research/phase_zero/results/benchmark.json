@@ -1,0 +1,94 @@
+{
+  "1": {
+    "cohorts": [
+      {
+        "year": 2014,
+        "actual": 10.6,
+        "estimates": {
+          "historical_tier1": 13.725,
+          "local_lag2": 10.3,
+          "month6_method": 12.675
+        }
+      },
+      {
+        "year": 2015,
+        "actual": 11.8,
+        "estimates": {
+          "historical_tier1": 12.88,
+          "local_lag2": 9.5,
+          "month6_method": 12.82
+        }
+      },
+      {
+        "year": 2016,
+        "actual": 13.0,
+        "estimates": {
+          "historical_tier1": 12.5,
+          "local_lag2": 10.6,
+          "month6_method": 12.95
+        }
+      },
+      {
+        "year": 2017,
+        "actual": 13.7,
+        "estimates": {
+          "historical_tier1": 12.4,
+          "local_lag2": 11.8,
+          "month6_method": 13.142857142857142
+        }
+      }
+    ],
+    "mae_pp": {
+      "historical_tier1": 1.50125,
+      "local_lag2": 1.725,
+      "month6_method": 0.92554
+    }
+  },
+  "2": {
+    "cohorts": [
+      {
+        "year": 2014,
+        "actual": 16.2,
+        "estimates": {
+          "historical_tier1": 13.725,
+          "local_lag2": 17.3,
+          "month6_method": 15.075
+        }
+      },
+      {
+        "year": 2015,
+        "actual": 17.5,
+        "estimates": {
+          "historical_tier1": 12.88,
+          "local_lag2": 17.3,
+          "month6_method": 15.420000000000002
+        }
+      },
+      {
+        "year": 2016,
+        "actual": 17.7,
+        "estimates": {
+          "historical_tier1": 12.5,
+          "local_lag2": 16.2,
+          "month6_method": 14.85
+        }
+      },
+      {
+        "year": 2017,
+        "actual": 16.7,
+        "estimates": {
+          "historical_tier1": 12.4,
+          "local_lag2": 17.5,
+          "month6_method": 14.142857142857142
+        }
+      }
+    ],
+    "mae_pp": {
+      "historical_tier1": 4.14875,
+      "local_lag2": 0.9,
+      "month6_method": 2.15304
+    }
+  },
+  "source": "https://home.treasury.gov/system/files/256/129_HAMP_Modification_Performance_Summary_Mar2023_v1.0.pdf",
+  "csv_sha256": "fe22e76d6d07f4635df80d6109579c210ae3ac65e0f684224a0c32bf88c3ab2a"
+}
