@@ -1,0 +1,151 @@
+{
+  "cohort": "Tier 1 HAMP permanent modifications",
+  "per_record_first_available_timestamp_in_supplied_schema": false,
+  "month_six_availability_independently_verified": false,
+  "by_effective_year": [
+    {
+      "year": 2009,
+      "modifications": 63359,
+      "loans": 63359,
+      "first_month_six_cutoff": "2009-12-31",
+      "last_month_six_cutoff": "2010-05-31",
+      "retrospective_exit_by_cutoff": 3471,
+      "no_month_six_row": 81,
+      "conflicting_month_six": 0,
+      "no_usable_report": 11347,
+      "due_after_cutoff": 7391,
+      "reported_proxy": 41069
+    },
+    {
+      "year": 2010,
+      "modifications": 532484,
+      "loans": 532484,
+      "first_month_six_cutoff": "2010-06-30",
+      "last_month_six_cutoff": "2011-05-31",
+      "retrospective_exit_by_cutoff": 31845,
+      "no_month_six_row": 155,
+      "conflicting_month_six": 0,
+      "no_usable_report": 64050,
+      "due_after_cutoff": 72430,
+      "reported_proxy": 364004
+    },
+    {
+      "year": 2011,
+      "modifications": 339311,
+      "loans": 339311,
+      "first_month_six_cutoff": "2011-06-30",
+      "last_month_six_cutoff": "2012-05-31",
+      "retrospective_exit_by_cutoff": 17094,
+      "no_month_six_row": 84,
+      "conflicting_month_six": 0,
+      "no_usable_report": 19942,
+      "due_after_cutoff": 62849,
+      "reported_proxy": 239342
+    },
+    {
+      "year": 2012,
+      "modifications": 195894,
+      "loans": 195894,
+      "first_month_six_cutoff": "2012-06-30",
+      "last_month_six_cutoff": "2013-05-31",
+      "retrospective_exit_by_cutoff": 8297,
+      "no_month_six_row": 216,
+      "conflicting_month_six": 0,
+      "no_usable_report": 8756,
+      "due_after_cutoff": 36963,
+      "reported_proxy": 141662
+    },
+    {
+      "year": 2013,
+      "modifications": 147264,
+      "loans": 147264,
+      "first_month_six_cutoff": "2013-06-30",
+      "last_month_six_cutoff": "2014-05-31",
+      "retrospective_exit_by_cutoff": 5666,
+      "no_month_six_row": 283,
+      "conflicting_month_six": 0,
+      "no_usable_report": 9906,
+      "due_after_cutoff": 27556,
+      "reported_proxy": 103853
+    },
+    {
+      "year": 2014,
+      "modifications": 86433,
+      "loans": 86433,
+      "first_month_six_cutoff": "2014-06-30",
+      "last_month_six_cutoff": "2015-05-31",
+      "retrospective_exit_by_cutoff": 3981,
+      "no_month_six_row": 317,
+      "conflicting_month_six": 0,
+      "no_usable_report": 5346,
+      "due_after_cutoff": 15871,
+      "reported_proxy": 60918
+    },
+    {
+      "year": 2015,
+      "modifications": 58369,
+      "loans": 58369,
+      "first_month_six_cutoff": "2015-06-30",
+      "last_month_six_cutoff": "2016-05-31",
+      "retrospective_exit_by_cutoff": 3077,
+      "no_month_six_row": 327,
+      "conflicting_month_six": 0,
+      "no_usable_report": 2957,
+      "due_after_cutoff": 10371,
+      "reported_proxy": 41637
+    },
+    {
+      "year": 2016,
+      "modifications": 37189,
+      "loans": 37189,
+      "first_month_six_cutoff": "2016-06-30",
+      "last_month_six_cutoff": "2017-05-31",
+      "retrospective_exit_by_cutoff": 2124,
+      "no_month_six_row": 383,
+      "conflicting_month_six": 0,
+      "no_usable_report": 1877,
+      "due_after_cutoff": 6233,
+      "reported_proxy": 26572
+    },
+    {
+      "year": 2017,
+      "modifications": 13134,
+      "loans": 13134,
+      "first_month_six_cutoff": "2017-06-30",
+      "last_month_six_cutoff": "2018-05-31",
+      "retrospective_exit_by_cutoff": 833,
+      "no_month_six_row": 258,
+      "conflicting_month_six": 0,
+      "no_usable_report": 734,
+      "due_after_cutoff": 2045,
+      "reported_proxy": 9264
+    }
+  ],
+  "totals": {
+    "modifications": 1473437,
+    "retrospective_exit_by_cutoff": 76388,
+    "no_month_six_row": 2104,
+    "conflicting_month_six": 0,
+    "no_usable_report": 124915,
+    "due_after_cutoff": 241709,
+    "reported_proxy": 1028321
+  },
+  "snapshot_comparison_to_2023": [
+    {
+      "snapshot": "historical",
+      "paired_modifications": 1471929,
+      "different_effective_date": 669,
+      "different_state": 297191,
+      "different_end_date": 298428,
+      "different_retrospective_exit_at_month_six": 295
+    },
+    {
+      "snapshot": "monthly_update",
+      "paired_modifications": 1473435,
+      "different_effective_date": 396,
+      "different_state": 120940,
+      "different_end_date": 121809,
+      "different_retrospective_exit_at_month_six": 100
+    }
+  ]
+}

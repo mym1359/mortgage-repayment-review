@@ -9,6 +9,7 @@ Reproducible research on U.S. mortgage repayment after loan modification, using 
 - مرحلهٔ صفر، آزمایش نرخ‌های گروه‌های سالانه با دادهٔ تجمیعی. Phase zero benchmarks annual-cohort rates with published aggregates. [روش و دستور اجرا / Method and run instructions](research/phase_zero/README.md)
 - بررسی منشأ و کیفیت آرشیو تکمیلی. The supplemental archive audit verifies provenance, coverage, and record quality. [گزارش کیفیت / Data quality report](docs/research/hamp-data-quality.md)
 - بازسازی نرخ‌های تاریخی ماه‌های ۶ و ۱۲ با آرشیوهای بازیابی‌شده. The historical reconstruction compares month-six and month-twelve estimates with Treasury's table. [گزارش بازسازی / Reconstruction report](docs/research/hamp-historical-reconstruction.md)
+- حسابرسی دسترسی زمانی داده‌ها در ماه ششم و پروتکل ارزیابی مدل. The month-six availability audit documents evidence gaps and the proposed evaluation protocol. [پروتکل و نتایج / Protocol and results](docs/research/hamp-asof-protocol.md)
 
 کد و گزارش‌های پژوهشی با کمک هوش مصنوعی تهیه شده‌اند. فایل‌های ورودی در سطح وام بیرون از مخزن نگهداری می‌شوند. جزئیات بازتولید و پیوندهای منابع رسمی در گزارش هر مرحله آمده‌اند.
 
