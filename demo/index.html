@@ -17,17 +17,24 @@
     </div>
   </header>
   <main class="shell">
+    <div class="case-picker">
+      <label for="case-picker">Review case</label>
+      <select id="case-picker">
+        <option value="ACS-001">ACS-001 · Payment reversal</option>
+        <option value="ACS-002">ACS-002 · Agreement conflict</option>
+      </select>
+    </div>
     <section class="case-header" aria-labelledby="case-title">
       <div>
-        <p class="case-id">Case ACS-001</p>
+        <p class="case-id" id="case-id">Case ACS-001</p>
         <h1 id="case-title">Payment reversal review</h1>
-        <p class="lede">Compare the repayment record before and after a posted payment was reversed.</p>
+        <p class="lede" id="case-description">Compare the repayment record before and after a posted payment was reversed.</p>
       </div>
       <fieldset class="snapshot">
         <legend>Review as of</legend>
         <div class="segments">
-          <label><input type="radio" name="snapshot" value="before"><span>Jun 11, 2025 <small>Before reversal</small></span></label>
-          <label><input type="radio" name="snapshot" value="after" checked><span>Jun 13, 2025 <small>After reversal</small></span></label>
+          <label><input type="radio" name="snapshot" value="before"><span>Jun 11, 2025 <small id="before-phase">Before reversal</small></span></label>
+          <label><input type="radio" name="snapshot" value="after" checked><span>Jun 13, 2025 <small id="after-phase">After reversal</small></span></label>
         </div>
       </fieldset>
     </section>
@@ -37,7 +44,10 @@
         <h2>Applicable agreement</h2>
         <p class="value" id="agreement-value"></p>
         <p class="detail" id="agreement-detail"></p>
-        <a id="agreement-source">View agreement evidence</a>
+        <div class="evidence-links">
+          <a id="agreement-source">View agreement evidence</a>
+          <a id="agreement-other-source" hidden></a>
+        </div>
       </article>
       <article class="finding">
         <h2>Last confirmed installment</h2>
@@ -66,7 +76,7 @@
       <section class="panel decision" aria-labelledby="decision-title">
         <div class="panel-heading">
           <h2 id="decision-title">Reviewer decision</h2>
-          <p>Record a decision for the selected review date.</p>
+          <p>Record a decision for the selected case and review date.</p>
         </div>
         <form id="decision-form">
           <label for="outcome">Decision</label>

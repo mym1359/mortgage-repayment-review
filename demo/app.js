@@ -1,6 +1,6 @@
 "use strict";
 
-const { evaluate, snapshots } = mortgageReview;
+const { cases, evaluate, snapshots } = mortgageReview;
 const element = id => document.getElementById(id);
 const date = value => new Intl.DateTimeFormat("en-US", {
   month: "short", day: "numeric", year: "numeric", timeZone: "UTC",
@@ -9,20 +9,21 @@ const money = cents => new Intl.NumberFormat("en-US", {
   style: "currency", currency: "USD",
 }).format(cents / 100);
 const dateTime = new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeStyle: "short" });
+const picker = element("case-picker");
 const form = element("decision-form");
 const outcome = element("outcome");
 const notes = element("notes");
 const status = element("save-status");
-const storageKey = "acs-demo:ACS-001:decisions:v1";
 const memory = new Map();
 
 function setText(id, value) {
   element(id).textContent = value;
 }
 
-function sourceLink(id, target) {
+function sourceLink(id, target, label) {
   const link = element(id);
   link.hidden = !target;
+  if (label) link.textContent = label;
   if (target) link.href = "#" + target;
   else link.removeAttribute("href");
 }
@@ -30,7 +31,7 @@ function sourceLink(id, target) {
 function timelineContent(entry) {
   if (entry.type === "agreement") {
     return [
-      entry.version === 1 ? "Original agreement signed" : "Modified agreement signed",
+      entry.version === 1 ? "Original agreement signed" : "Modified agreement v" + entry.version + " signed",
       "Effective " + date(entry.effective) + " · " + money(entry.installment) + " monthly installment",
     ];
   }
@@ -71,18 +72,18 @@ function renderEvidence(entries) {
   element("timeline").replaceChildren(...items);
 }
 
-function getHistory(asOf) {
-  if (memory.has(asOf)) return memory.get(asOf);
+function getHistory(key) {
+  if (memory.has(key)) return memory.get(key);
   try {
-    const records = JSON.parse(localStorage.getItem(storageKey + ":" + asOf));
+    const records = JSON.parse(localStorage.getItem(key));
     return Array.isArray(records) ? records : [];
   } catch {
     return [];
   }
 }
 
-function renderHistory(asOf) {
-  const history = getHistory(asOf);
+function renderHistory(key) {
+  const history = getHistory(key);
   element("no-decisions").hidden = history.length > 0;
   element("decision-history").replaceChildren(...history.map((record, index) => {
     const item = document.createElement("li");
@@ -102,40 +103,82 @@ function selectedDate() {
   return snapshots[document.querySelector('input[name="snapshot"]:checked').value];
 }
 
-function render() {
-  const asOf = selectedDate();
-  const { agreement, lastPayment, reversal, reversedPayment, evidence, rule } = evaluate(asOf);
+function decisionKey() {
+  return "acs-demo:" + picker.value + ":decisions:v1:" + selectedDate();
+}
+
+function renderAgreement(agreement, conflict) {
+  if (conflict.length) {
+    const [first, second] = conflict;
+    setText("agreement-value", "Agreement unresolved");
+    setText("agreement-detail", "Effective " + date(first.effective) + " · v" + first.version + " "
+      + money(first.installment) + " vs. v" + second.version + " " + money(second.installment));
+    sourceLink("agreement-source", first.id, "View version " + first.version);
+    sourceLink("agreement-other-source", second.id, "View version " + second.version);
+    return;
+  }
   setText("agreement-value", "Version " + agreement.version);
   setText("agreement-detail", "Effective " + date(agreement.effective) + " · " + money(agreement.installment) + " monthly");
-  setText("payment-value", date(lastPayment.due));
-  setText("payment-detail", money(lastPayment.amount) + " · Posted " + date(lastPayment.date));
-  setText("referral-value", reversal ? "Human review required" : "No reversal referral");
-  setText("referral-detail", reversal
-    ? "The " + date(reversedPayment.due) + " installment was reversed on " + date(reversal.date) + "."
-    : "The ledger shows no reversal through this review date.");
-  element("referral-card").classList.toggle("attention", Boolean(reversal));
+  sourceLink("agreement-source", agreement.id, "View agreement evidence");
+  sourceLink("agreement-other-source", null);
+}
+
+function renderReferral({ rule, conflict, reversal, reversedPayment }) {
+  const needsReview = conflict.length > 0 || Boolean(reversal);
+  setText("referral-value", needsReview ? "Human review required"
+    : picker.value === "ACS-002" ? "No agreement conflict" : "No reversal referral");
+  let detail = "The ledger shows no reversal through this review date.";
+  if (picker.value === "ACS-002") {
+    detail = conflict.length
+      ? "Two signed versions have different monthly amounts and the same effective date. Review both documents to establish which applies."
+      : "Only one signed version applies to the current installment.";
+  } else if (reversal) {
+    detail = "The " + date(reversedPayment.due) + " installment was reversed on " + date(reversal.date) + ".";
+  }
+  setText("referral-detail", detail);
+  element("referral-card").classList.toggle("attention", needsReview);
   setText("rule-version", "Rule " + rule);
+  sourceLink("referral-source", conflict[0]?.id ?? reversal?.id,
+    conflict.length ? "View conflict evidence" : "View reversal evidence");
+}
+
+function render() {
+  const asOf = selectedDate();
+  const { title, description, phases } = cases[picker.value];
+  const result = evaluate(asOf, picker.value);
+  const { agreement, conflict, lastPayment, evidence } = result;
+  setText("case-id", "Case " + picker.value);
+  setText("case-title", title);
+  setText("case-description", description);
+  setText("before-phase", phases.before);
+  setText("after-phase", phases.after);
+  renderAgreement(agreement, conflict);
+  setText("payment-value", date(lastPayment.due));
+  setText("payment-detail", money(lastPayment.amount) + " · Posted " + date(lastPayment.date)
+    + (conflict.length ? " · June installment pending agreement review" : ""));
+  renderReferral(result);
   setText("evidence-caption", "Recorded through " + date(asOf) + " · Newest first");
   renderEvidence(evidence);
-  sourceLink("agreement-source", agreement.id);
   sourceLink("payment-source", lastPayment.id);
-  sourceLink("referral-source", reversal?.id);
-  renderHistory(asOf);
+  renderHistory(decisionKey());
   status.textContent = "";
 }
 
 const drafts = new Map();
-let activeDate = selectedDate();
+let activeKey = decisionKey();
 
+function switchReview() {
+  drafts.set(activeKey, { outcome: outcome.value, notes: notes.value });
+  activeKey = decisionKey();
+  outcome.value = drafts.get(activeKey)?.outcome ?? "";
+  notes.value = drafts.get(activeKey)?.notes ?? "";
+  notes.setCustomValidity("");
+  render();
+}
+
+picker.addEventListener("change", switchReview);
 for (const toggle of document.querySelectorAll('input[name="snapshot"]')) {
-  toggle.addEventListener("change", () => {
-    drafts.set(activeDate, { outcome: outcome.value, notes: notes.value });
-    activeDate = selectedDate();
-    outcome.value = drafts.get(activeDate)?.outcome ?? "";
-    notes.value = drafts.get(activeDate)?.notes ?? "";
-    notes.setCustomValidity("");
-    render();
-  });
+  toggle.addEventListener("change", switchReview);
 }
 
 notes.addEventListener("input", () => notes.setCustomValidity(""));
@@ -147,23 +190,23 @@ form.addEventListener("submit", event => {
     notes.reportValidity();
     return;
   }
-  const asOf = selectedDate();
-  const records = [...getHistory(asOf), {
+  const key = decisionKey();
+  const records = [...getHistory(key), {
     decision: outcome.selectedOptions[0].textContent,
     notes: note,
     savedAt: new Date().toISOString(),
-    rule: evaluate(asOf).rule,
+    rule: cases[picker.value].rule,
   }];
   try {
-    localStorage.setItem(storageKey + ":" + asOf, JSON.stringify(records));
-    memory.delete(asOf);
+    localStorage.setItem(key, JSON.stringify(records));
+    memory.delete(key);
     status.textContent = "Decision saved in this browser.";
   } catch {
-    memory.set(asOf, records);
+    memory.set(key, records);
     status.textContent = "Decision saved for this tab only. Browser storage is unavailable.";
   }
   form.reset();
-  renderHistory(asOf);
+  renderHistory(key);
 });
 
 render();

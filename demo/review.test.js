@@ -34,3 +34,26 @@ test("the reversal takes effect on its recorded date and explains the fallback a
     ]);
   }
 });
+
+test("the conflict case uses the one visible June agreement before the second is signed", () => {
+  const result = evaluate(snapshots.before, "ACS-002");
+  assert.equal(result.agreement.id, "AGR-04");
+  assert.equal(result.lastPayment.id, "PAY-04");
+  assert.deepEqual(result.conflict, []);
+  assert.ok(!result.evidence.some(entry => entry.id === "AGR-05"));
+});
+
+test("conflicting terms trigger review at signing and retain the last independently confirmed installment", () => {
+  for (const asOf of ["2025-06-12", snapshots.after]) {
+    const result = evaluate(asOf, "ACS-002");
+    assert.equal(result.agreement, undefined);
+    assert.deepEqual(result.conflict.map(agreement => agreement.id), ["AGR-05", "AGR-04"]);
+    assert.deepEqual(result.conflict.map(agreement => agreement.installment), [145000, 135000]);
+    assert.ok(result.conflict.every(agreement => agreement.effective === "2025-06-01"));
+    assert.equal(result.lastPayment.id, "PAY-03");
+    assert.equal(result.lastPayment.due, "2025-05-01");
+    assert.ok(result.evidence.some(entry => entry.id === "PAY-04"));
+    assert.equal(result.reversal, undefined);
+    assert.equal(result.rule, "AGR-1 v1.0");
+  }
+});

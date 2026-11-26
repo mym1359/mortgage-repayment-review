@@ -12,23 +12,57 @@ const mortgageReview = (() => {
     { id: "REV-01", type: "reversal", date: "2025-06-12", paymentId: "PAY-02", amount: 125000 },
   ];
   const snapshots = { before: "2025-06-11", after: "2025-06-13" };
-  const rule = "REV-1 v1.0";
+  const cases = {
+    "ACS-001": {
+      title: "Payment reversal review",
+      rule: "REV-1 v1.0",
+      description: "Compare the repayment record before and after a posted payment was reversed.",
+      phases: { before: "Before reversal", after: "After reversal" },
+      agreements,
+      events,
+    },
+    "ACS-002": {
+      title: "Agreement conflict review",
+      rule: "AGR-1 v1.0",
+      description: "Compare the repayment record before and after a second signed modification appears.",
+      phases: { before: "Before conflict", after: "After conflict" },
+      agreements: [
+        { id: "AGR-03", version: 1, signed: "2025-03-11", effective: "2025-04-01", installment: 155000 },
+        { id: "AGR-04", version: 2, signed: "2025-05-22", effective: "2025-06-01", installment: 135000 },
+        { id: "AGR-05", version: 3, signed: "2025-06-12", effective: "2025-06-01", installment: 145000 },
+      ],
+      events: [
+        { id: "PAY-03", type: "payment", date: "2025-05-05", due: "2025-05-01", agreementId: "AGR-03", amount: 155000 },
+        { id: "PAY-04", type: "payment", date: "2025-06-05", due: "2025-06-01", agreementId: "AGR-04", amount: 135000 },
+      ],
+    },
+  };
   const byLatestDate = (a, b) => b.date.localeCompare(a.date);
 
-  function agreementAt(asOf, due = asOf) {
-    return agreements
-      .filter(agreement => agreement.signed <= asOf && agreement.effective <= due)
-      .sort((a, b) => b.effective.localeCompare(a.effective) || b.version - a.version)[0];
+  function agreementAt(visibleAgreements, due) {
+    const eligible = visibleAgreements
+      .filter(agreement => agreement.effective <= due)
+      .sort((a, b) => b.effective.localeCompare(a.effective) || b.version - a.version);
+    const latest = eligible[0];
+    if (!latest) return { agreement: undefined, conflict: [] };
+    const candidates = eligible.filter(agreement => agreement.effective === latest.effective);
+    // These fixtures have no precedence evidence for conflicting terms on the same effective date.
+    const conflict = candidates.some(agreement => agreement.installment !== latest.installment)
+      ? candidates
+      : [];
+    return { agreement: conflict.length ? undefined : latest, conflict };
   }
 
-  function evaluate(asOf) {
-    const visibleAgreements = agreements.filter(agreement => agreement.signed <= asOf);
-    const visibleEvents = events.filter(event => event.date <= asOf);
+  function evaluate(asOf, caseId = "ACS-001") {
+    const selected = cases[caseId];
+    const visibleAgreements = selected.agreements.filter(agreement => agreement.signed <= asOf);
+    const visibleEvents = selected.events.filter(event => event.date <= asOf);
+    const { agreement, conflict } = agreementAt(visibleAgreements, asOf);
     const reversals = visibleEvents.filter(event => event.type === "reversal");
     const lastPayment = visibleEvents
       .filter(event => {
         if (event.type !== "payment" || event.due > asOf) return false;
-        const agreement = agreementAt(asOf, event.due);
+        const { agreement } = agreementAt(visibleAgreements, event.due);
         const reversed = reversals
           .filter(reversal => reversal.paymentId === event.id)
           .reduce((total, reversal) => total + reversal.amount, 0);
@@ -37,7 +71,8 @@ const mortgageReview = (() => {
       .sort((a, b) => b.due.localeCompare(a.due) || byLatestDate(a, b))[0];
     const reversal = reversals.sort(byLatestDate)[0];
     return {
-      agreement: agreementAt(asOf),
+      agreement,
+      conflict,
       lastPayment,
       reversal,
       reversedPayment: visibleEvents.find(event => event.id === reversal?.paymentId),
@@ -45,11 +80,11 @@ const mortgageReview = (() => {
         ...visibleAgreements.map(agreement => ({ ...agreement, type: "agreement", date: agreement.signed })),
         ...visibleEvents,
       ].sort(byLatestDate),
-      rule,
+      rule: selected.rule,
     };
   }
 
-  return { evaluate, snapshots };
+  return { cases, evaluate, snapshots };
 })();
 
 if (typeof module !== "undefined") module.exports = mortgageReview;

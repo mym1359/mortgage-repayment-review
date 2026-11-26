@@ -22,6 +22,15 @@ The research code and reports were prepared with AI assistance. Loan-level sourc
 
 ## دموی بازبینی آفلاین | Offline reviewer demo
 
-مخزن را دانلود کنید و فایل `demo/index.html` را در مرورگر باز کنید. در پروندهٔ ساختگی، دو تاریخ بازبینی را مقایسه کنید تا ببینید برگشت پرداخت ژوئن چگونه آخرین قسط تأییدشده و وضعیت ارجاع را تغییر می‌دهد. هر نتیجه به ردیف مربوط در خط زمانی متصل است. تصمیم و یادداشت به تاریخ انتخاب‌شده تعلق دارند. ذخیرهٔ دوباره، اصلاحیه‌ای در سابقه ثبت می‌کند. تصمیم‌ها در صورت دسترسی به حافظهٔ محلی در همان مرورگر و همان مسیر فایل باقی می‌مانند. آزمون قواعد با دستور `node --test demo/review.test.js` اجرا می‌شود.
+مخزن را دانلود کنید و فایل `demo/index.html` را در مرورگر باز کنید. پرونده را از فهرست انتخاب کنید و دو تاریخ بازبینی را مقایسه کنید.
 
-Download the repository and open `demo/index.html` in a browser. Compare the two review dates in the synthetic case to see how the June payment reversal changes the last confirmed installment and referral status. Each finding links to the corresponding timeline entry. Decisions and notes are tied to the selected date. Saving again adds a revision to the history. Decisions persist in the same browser at the same file path when local storage is available. Run the rule checks with `node --test demo/review.test.js`.
+Download the repository and open `demo/index.html` in a browser. Select a case and compare its two review dates.
+
+| پرونده / Case | سناریو / Scenario |
+| --- | --- |
+| ACS-001 | برگشت پرداخت ژوئن، آخرین قسط تأییدشده را به مه برمی‌گرداند و پرونده را برای بازبینی انسانی علامت می‌زند. / Reversing the June payment makes May the last confirmed installment and flags the case for human review. |
+| ACS-002 | دو نسخهٔ امضاشده مبلغ‌های متفاوتی با تاریخ اجرای یکسان دارند. توافق معتبر و قسط ژوئن تا بازبینی کارشناس معلق می‌مانند و قسط مه همچنان تأییدشده است. / Two signed versions specify different amounts with the same effective date. The applicable agreement and June installment remain unresolved pending human review, while May remains confirmed. |
+
+پیوندهای شواهد به ردیف‌های خط زمانی می‌رسند. تصمیم و یادداشت به پرونده و تاریخ انتخاب‌شده تعلق دارند. ذخیرهٔ دوباره، اصلاحیه‌ای در سابقه ثبت می‌کند. تصمیم‌ها در صورت دسترسی به حافظهٔ محلی در همان مرورگر و همان مسیر فایل باقی می‌مانند. آزمون قواعد با دستور `node --test demo/review.test.js` اجرا می‌شود.
+
+Evidence links point to timeline entries. Decisions and notes are tied to the selected case and date. Saving again adds a revision to the history. Decisions persist in the same browser at the same file path when local storage is available. Run the rule checks with `node --test demo/review.test.js`.
