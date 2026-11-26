@@ -1,0 +1,15 @@
+# بازبینی بازپرداخت وام مسکن آمریکا | U.S. mortgage repayment review
+
+این پروژه پژوهش بازتولیدپذیر دربارهٔ سابقهٔ بازپرداخت پس از اصلاح وام مسکن را با داده‌های عمومی برنامهٔ هامپ خزانه‌داری آمریکا ثبت می‌کند. واحد تحلیل و محدودیت هر مرحله در گزارش آن آمده است.
+
+This project documents reproducible research on repayment history after U.S. mortgage modifications using public Treasury HAMP data. Each stage report states its unit of analysis and limitations.
+
+## مراحل پژوهش | Research stages
+
+- مرحلهٔ صفر، آزمایش نرخ‌های گروه‌های سالانه با دادهٔ تجمیعی. Phase zero benchmarks annual-cohort rates with published aggregates. [روش و دستور اجرا / Method and run instructions](research/phase_zero/README.md)
+- بررسی منشأ و کیفیت آرشیو تکمیلی. The supplemental archive audit verifies provenance, coverage, and record quality. [گزارش کیفیت / Data quality report](docs/research/hamp-data-quality.md)
+- بازسازی نرخ‌های تاریخی ماه‌های ۶ و ۱۲ با آرشیوهای بازیابی‌شده. The historical reconstruction compares month-six and month-twelve estimates with Treasury's table. [گزارش بازسازی / Reconstruction report](docs/research/hamp-historical-reconstruction.md)
+
+کد و گزارش‌های پژوهشی با کمک هوش مصنوعی تهیه شده‌اند. فایل‌های ورودی در سطح وام بیرون از مخزن نگهداری می‌شوند. جزئیات بازتولید و پیوندهای منابع رسمی در گزارش هر مرحله آمده‌اند.
+
+The research code and reports were prepared with AI assistance. Loan-level source files are kept outside the repository. Each stage report provides reproduction instructions and direct source links.

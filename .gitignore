@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+/work/
+/data/raw/
+/data/processed/
+*.zip
+*.parquet
+*.duckdb
+*.duckdb.*
