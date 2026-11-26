@@ -46,6 +46,8 @@ Among rows paired on loan and modification ID, the historical and March 2023 sna
 
 Model development requires source-level monthly vintages or arrival timestamps with revision history. Before training, automated checks must detect post-cutoff feature use, a loan appearing in multiple partitions, and outcome assignment before follow-up is complete. The last check preserves censoring and competing events as separate dispositions.
 
+حسابرسی تقویمی بعدی، هم‌پوشانی آموزش و اعتبارسنجی را اندازه‌گیری کرد. The follow-up calendar audit quantified the training-to-validation overlap. [نتایج تقویمی / Calendar results](hamp-earlier-vintages.md)
+
 ## بازتولید | Reproduction
 
 پس از مرحله‌بندی سه آرشیو مطابق گزارش بازسازی تاریخی، فرمان زیر را از ریشهٔ پروژه اجرا کنید. خروجی شامل شمارش سالانه و اختلاف نسخه‌هاست.

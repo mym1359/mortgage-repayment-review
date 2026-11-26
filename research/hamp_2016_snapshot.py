@@ -67,19 +67,21 @@ def extract_warc(warc, target):
             raise ValueError("Expected exactly one complete WARC response.")
 
 
-def stage(connection, source):
+def stage(connection, source, has_loan_id=True):
+    columns = SOURCE_COLUMNS if has_loan_id else SOURCE_COLUMNS[1:]
+    loan_expression = "CAST(mha_ln_id AS BIGINT)" if has_loan_id else "NULL::BIGINT"
     reader = arrow_csv.open_csv(
         source, read_options=arrow_csv.ReadOptions(use_threads=False, block_size=8 * 1024 * 1024),
         parse_options=arrow_csv.ParseOptions(newlines_in_values=True),
         convert_options=arrow_csv.ConvertOptions(
-            include_columns=SOURCE_COLUMNS,
-            column_types={column: pa.string() for column in SOURCE_COLUMNS},
+            include_columns=columns,
+            column_types={column: pa.string() for column in columns},
             strings_can_be_null=True,
             null_values=[""],
         ),
     )
     connection.execute("""
-        CREATE TABLE snapshot (
+        CREATE TABLE IF NOT EXISTS snapshot (
             loan BIGINT, modification BIGINT, state VARCHAR, mode VARCHAR,
             effective_date DATE, last_due_date DATE, processed_date DATE
         )
@@ -87,9 +89,9 @@ def stage(connection, source):
     connection.execute("BEGIN")
     for index, batch in enumerate(reader, start=1):
         connection.register("source_batch", pa.Table.from_batches([batch]))
-        connection.execute("""
+        connection.execute(f"""
             INSERT INTO snapshot
-            SELECT CAST(mha_ln_id AS BIGINT), CAST(fncl_ast_id AS BIGINT),
+            SELECT {loan_expression}, CAST(fncl_ast_id AS BIGINT),
                    ln_st_nme, ln_mdfc_mode_nme, CAST(ln_mdfc_eff_dt AS DATE),
                    CAST(ln_lpi_dt AS DATE), CAST(last_rptd_mthy_acvy_dt AS DATE)
             FROM source_batch
@@ -101,7 +103,7 @@ def stage(connection, source):
     connection.execute("COMMIT")
 
 
-def evidence(connection):
+def evidence(connection, capture_date=CAPTURE_DATE, match_loan_id=True):
     connection.execute("""
         CREATE TEMP VIEW reference AS
         SELECT loan, modification, effective_date,
@@ -115,17 +117,24 @@ def evidence(connection):
              HAVING modification IS NULL OR count(*) <> 1)
     """).fetchone()[0]:
         raise ValueError("Tier 1 reference has ambiguous modification IDs.")
-    by_year = rows(connection, """
+    if not match_loan_id and connection.execute("""
+        SELECT count(*) <> count(DISTINCT modification)
+        FROM latest_archive.latest WHERE kind = 'Modification Information'
+    """).fetchone()[0]:
+        raise ValueError("Modification-only match requires unique IDs across the reference snapshot.")
+    loan_condition = "AND s.loan = r.loan" if match_loan_id else ""
+    by_year = rows(connection, f"""
         WITH matched AS (
-            SELECT s.loan, s.modification, count(*) AS raw_rows,
+            SELECT r.loan, s.modification, count(*) AS raw_rows,
                    count(DISTINCT (s.state, s.effective_date, s.last_due_date, s.processed_date))
                        AS variants,
                    min(s.state) AS state,
                    min(s.effective_date) AS effective_date,
                    min(s.last_due_date) AS last_due_date, min(s.processed_date) AS processed_date
-            FROM snapshot s JOIN reference r USING (loan, modification)
+            FROM snapshot s JOIN reference r
+              ON s.modification = r.modification {loan_condition}
             WHERE s.mode = 'Official Modification'
-            GROUP BY s.loan, s.modification
+            GROUP BY r.loan, s.modification
         ), assessed AS (
             SELECT year(r.effective_date) AS year, m.raw_rows, m.state, m.last_due_date,
                    m.processed_date, r.cutoff,
@@ -154,7 +163,7 @@ def evidence(connection):
                        AND processed_date <= CAST(? AS DATE)
                ) AS earlier_snapshot_with_active_state_and_payment_fields
         FROM assessed GROUP BY year ORDER BY year
-    """, [CAPTURE_DATE, CAPTURE_DATE, CAPTURE_DATE])
+    """, [capture_date, capture_date, capture_date])
     for row in by_year:
         if row["matched"] != sum(row[key] for key in (
             "conflicting_snapshot", "different_effective_date",

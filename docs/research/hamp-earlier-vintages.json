@@ -1,0 +1,640 @@
+{
+  "source_search": {
+    "end_of_term_collections": [
+      {
+        "collection": "EOT-2008",
+        "blocks_read": 3,
+        "prefixes": [
+          "gov,treasury,mhadatafile)/",
+          "gov,treasury)/initiatives/financial-stability/reports/pages/mha_publicfile.aspx",
+          "gov,treasury)/initiatives/financial-stability/results/pages/mha_publicfile.aspx",
+          "gov,treasury)/initiatives/financial-stability/reports/documents/hmp_public",
+          "gov,treasury)/initiatives/financial-stability/results/documents/hmp_public_user_mod_data_",
+          "gov,treasury)/initiatives/financial-stability/reports/reports/hmp_public_user_mod_data_",
+          "gov,treasury)/initiatives/financial-stability/results/reports/hmp_public_user_mod_data_",
+          "gov,financialstability)/"
+        ],
+        "first_lien_payload_captures": 0
+      },
+      {
+        "collection": "EOT-2012",
+        "blocks_read": 4,
+        "prefixes": [
+          "gov,treasury,mhadatafile)/",
+          "gov,treasury)/initiatives/financial-stability/reports/pages/mha_publicfile.aspx",
+          "gov,treasury)/initiatives/financial-stability/results/pages/mha_publicfile.aspx",
+          "gov,treasury)/initiatives/financial-stability/reports/documents/hmp_public",
+          "gov,treasury)/initiatives/financial-stability/results/documents/hmp_public_user_mod_data_",
+          "gov,treasury)/initiatives/financial-stability/reports/reports/hmp_public_user_mod_data_",
+          "gov,treasury)/initiatives/financial-stability/results/reports/hmp_public_user_mod_data_",
+          "gov,financialstability)/"
+        ],
+        "first_lien_payload_captures": 12
+      },
+      {
+        "collection": "EOT-2016",
+        "blocks_read": 5,
+        "prefixes": [
+          "gov,treasury,mhadatafile)/",
+          "gov,treasury)/initiatives/financial-stability/reports/pages/mha_publicfile.aspx",
+          "gov,treasury)/initiatives/financial-stability/results/pages/mha_publicfile.aspx",
+          "gov,treasury)/initiatives/financial-stability/reports/documents/hmp_public",
+          "gov,treasury)/initiatives/financial-stability/results/documents/hmp_public_user_mod_data_",
+          "gov,treasury)/initiatives/financial-stability/reports/reports/hmp_public_user_mod_data_",
+          "gov,treasury)/initiatives/financial-stability/results/reports/hmp_public_user_mod_data_",
+          "gov,financialstability)/"
+        ],
+        "first_lien_payload_captures": 23
+      }
+    ],
+    "wayback_regional_urls_probed": 45,
+    "wayback_regional_urls_with_capture": 26,
+    "indexed_october_2011_candidates": [
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_10_20110916.csv",
+        "capture_utc": "20111029000546",
+        "archive_url": "http://web.archive.org/web/20111029000546/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_10_20110916.csv"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_1_20110916.csv",
+        "capture_utc": "20111028232724",
+        "archive_url": "http://web.archive.org/web/20111028232724/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_1_20110916.csv"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_2_20110916.csv",
+        "capture_utc": "20111029000157",
+        "archive_url": "http://web.archive.org/web/20111029000157/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_2_20110916.csv"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_3_20110916.csv",
+        "capture_utc": "20111028235518",
+        "archive_url": "http://web.archive.org/web/20111028235518/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_3_20110916.csv"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_4_20110916.csv",
+        "capture_utc": "20111028234256",
+        "archive_url": "http://web.archive.org/web/20111028234256/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_4_20110916.csv"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_5_20110916.csv",
+        "capture_utc": "20111028235259",
+        "archive_url": "http://web.archive.org/web/20111028235259/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_5_20110916.csv"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_6_20110916.zip",
+        "capture_utc": "20111028233408",
+        "archive_url": "http://web.archive.org/web/20111028233408/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_6_20110916.zip"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_7_20110916.zip",
+        "capture_utc": "20111028233819",
+        "archive_url": "http://web.archive.org/web/20111028233819/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_7_20110916.zip"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_8_20110916.csv",
+        "capture_utc": "20111029000338",
+        "archive_url": "http://web.archive.org/web/20111029000338/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_8_20110916.csv"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_99_20110916.csv",
+        "capture_utc": "20111029000112",
+        "archive_url": "http://web.archive.org/web/20111029000112/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_99_20110916.csv"
+      },
+      {
+        "url": "http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_9_20110916.csv",
+        "capture_utc": "20111028234026",
+        "archive_url": "http://web.archive.org/web/20111028234026/http://www.treasury.gov/initiatives/financial-stability/results/Documents/HMP_Public_User_Mod_Data_9_20110916.csv"
+      }
+    ],
+    "indexed_october_2011_payloads_audited": false
+  },
+  "release_audits": {
+    "september_2012": {
+      "capture_date_utc": "2012-09-26",
+      "match_using_archive_loan_and_modification_ids": false,
+      "sources": [
+        {
+          "file": "HMP_Public_User_Mod_Data_1.zip",
+          "capture_utc": "20120926091650",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_1.zip",
+          "payload_sha1_base32": "2J4ZFZP7OFD55HQM7OWVW4ZRFI3V26SS",
+          "sha256": "58ab69bba47f98e82eb0a1a762dd3f79d210a606b2ceb69223c9d6ec2123d0c8",
+          "bytes": 58959974,
+          "warc_offset": 83568544,
+          "warc_record_bytes": 58978104,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926091638225-02657-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_1_20120817.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926091650id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_1.zip"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_10.csv",
+          "capture_utc": "20120926092746",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_10.csv",
+          "payload_sha1_base32": "DU5PKHIZTK4QBCXCSC7FWBS5R4Q36ORZ",
+          "sha256": "8972be9b18a9473a0fb2d558b95afaf0f894c1ba97866b2b44ad79714796e2c3",
+          "bytes": 254867723,
+          "warc_offset": 741207757,
+          "warc_record_bytes": 23999507,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926092050299-02658-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_10.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926092746id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_10.csv"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_2.csv",
+          "capture_utc": "20120926092439",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_2.csv",
+          "payload_sha1_base32": "AOLXTFJO3WVASZO36TYWOY66AXRFRKIG",
+          "sha256": "02080deef07611a68278e2faea46b5e72f78d73a84db73cd0b4ab16b3bfe2f18",
+          "bytes": 138296483,
+          "warc_offset": 403899128,
+          "warc_record_bytes": 13778250,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926092050299-02658-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_2.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926092439id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_2.csv"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_3.csv",
+          "capture_utc": "20120926095400",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_3.csv",
+          "payload_sha1_base32": "ALUREFBIHSVHMWBRYYWASHMPKEB5SKYJ",
+          "sha256": "a7a194b336d658bfdb303c71d32684eb2469e3df0fbefdd8d1e72236bf6151fd",
+          "bytes": 478029429,
+          "warc_offset": 3615446,
+          "warc_record_bytes": 51354500,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926095819767-02667-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_3.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926095400id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_3.csv"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_4.csv",
+          "capture_utc": "20120926093930",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_4.csv",
+          "payload_sha1_base32": "YP6FSSX3UOCAMBCEFGYH5OPN5PJYXE4L",
+          "sha256": "190aa78c5a7d481f924a4ad8ac1937eb5cff46a581b0e35b8f2a692c5d6dd4e0",
+          "bytes": 432138510,
+          "warc_offset": 317036574,
+          "warc_record_bytes": 49067894,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926093922415-02662-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_4.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926093930id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_4.csv"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_5.csv",
+          "capture_utc": "20120926091832",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_5.csv",
+          "payload_sha1_base32": "L2FP73QS3LHP2N2BUQYRTT6K7SE5KOGB",
+          "sha256": "9af563ae29e11b4834a41260211572512f2fbd4713880106c75c6b91109b6a15",
+          "bytes": 209677942,
+          "warc_offset": 846882126,
+          "warc_record_bytes": 23866440,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926091202146-02655-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_5.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926091832id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_5.csv"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_6.zip",
+          "capture_utc": "20120926081257",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_6.zip",
+          "payload_sha1_base32": "HUL4OOQDBZ66NEFRVDA24QTQSQYEV4PT",
+          "sha256": "827d79eeda786b0f6cb2355236f5ebdb9caf08009ba42e607a76e66c7b2fc011",
+          "bytes": 118501146,
+          "warc_offset": 913673111,
+          "warc_record_bytes": 118535871,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926075926913-02637-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_6_20120817.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926081257id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_6.zip"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_7.zip",
+          "capture_utc": "20120926100825",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_7.zip",
+          "payload_sha1_base32": "6N55XRYHAOZQI4JNGEFGTI2KLYPXA3CA",
+          "sha256": "33ca863a92271c1ddf25e7777fb0829adcc900aba74905195fd421cb7bee2b01",
+          "bytes": 116199823,
+          "warc_offset": 843228549,
+          "warc_record_bytes": 116234080,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926095925609-02668-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_7_20120817.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926100825id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_7.zip"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_8.csv",
+          "capture_utc": "20120926100251",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_8.csv",
+          "payload_sha1_base32": "7ZPWEYM65BCAFSGO4LAEBJUMIY52USJ3",
+          "sha256": "39a38b28730cc90b151e1ad0998aa37165d0c2986cf40c0789dd0085853e112c",
+          "bytes": 7149140,
+          "warc_offset": 422576130,
+          "warc_record_bytes": 940699,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926095925609-02668-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_8.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926100251id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_8.csv"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_9.csv",
+          "capture_utc": "20120926094815",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_9.csv",
+          "payload_sha1_base32": "BKPR75H7U2Z27G5PEUO4FAZV5OQDBNVS",
+          "sha256": "bfd1251933a344189b853d5aed996ecc6e657dc61e64787675109c8bd16c1986",
+          "bytes": 172521251,
+          "warc_offset": 481173760,
+          "warc_record_bytes": 18174836,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926093922415-02662-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_9.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926094815id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_9.csv"
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_99.csv",
+          "capture_utc": "20120926095119",
+          "url": "http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_99.csv",
+          "payload_sha1_base32": "2FKVBYAMXRBQHIZKB7G6WNYRJP5KK3UN",
+          "sha256": "fc58a1e9bf7ea4d24ab121091a54afff4a0956cfab29ff095fb00e14631d110c",
+          "bytes": 3478,
+          "warc_offset": 504560016,
+          "warc_record_bytes": 1725,
+          "warc_url": "https://eotarchive.s3.amazonaws.com/crawl-data/EOT-2012/segments/IA-000/warc/EOT-2012-20120926093922415-02662-26126~wbgrp-crawl002.us.archive.org~8443.warc.gz",
+          "csv_member": "HMP_Public_User_Mod_Data_99.csv",
+          "columns": 169,
+          "replay_url": "https://web.archive.org/web/20120926095119id_/http://www.treasury.gov/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_99.csv"
+        }
+      ],
+      "source_profile": {
+        "rows": 4643865,
+        "rows_with_processing_date": 1055815,
+        "earliest_processing_date": "2009-11-02",
+        "latest_processing_date": "2012-08-10"
+      },
+      "tier1_by_effective_year": [
+        {
+          "year": 2009,
+          "reference_modifications": 63359,
+          "matched": 62819,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 148,
+          "snapshot_at_or_after_cutoff": 62671,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2010,
+          "reference_modifications": 532484,
+          "matched": 529495,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 1056,
+          "snapshot_at_or_after_cutoff": 528439,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2011,
+          "reference_modifications": 339311,
+          "matched": 335155,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 624,
+          "snapshot_at_or_after_cutoff": 334531,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2012,
+          "reference_modifications": 195894,
+          "matched": 122103,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 179,
+          "snapshot_at_or_after_cutoff": 51236,
+          "snapshot_before_cutoff": 70688,
+          "snapshot_during_month_six": 15533,
+          "earlier_snapshot_with_active_state_and_payment_fields": 59556
+        },
+        {
+          "year": 2013,
+          "reference_modifications": 147264,
+          "matched": 28,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 28,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2014,
+          "reference_modifications": 86433,
+          "matched": 15,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 15,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2015,
+          "reference_modifications": 58369,
+          "matched": 0,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 0,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2016,
+          "reference_modifications": 37189,
+          "matched": 5,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 5,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2017,
+          "reference_modifications": 13134,
+          "matched": 3,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 3,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        }
+      ],
+      "tier1_totals": {
+        "reference_modifications": 1473437,
+        "matched": 1049623,
+        "surplus_matched_source_rows": 0,
+        "conflicting_snapshot": 0,
+        "different_effective_date": 2058,
+        "snapshot_at_or_after_cutoff": 976877,
+        "snapshot_before_cutoff": 70688,
+        "snapshot_during_month_six": 15533,
+        "earlier_snapshot_with_active_state_and_payment_fields": 59556
+      },
+      "snapshots_before_cutoff_by_partition": {
+        "train": 70688,
+        "validation": 0,
+        "gap": 0,
+        "test": 0
+      }
+    },
+    "june_2013": {
+      "capture_date_utc": "2013-06-25",
+      "match_using_archive_loan_and_modification_ids": true,
+      "sources": [
+        {
+          "file": "HMP_Public_User_Mod_Data_1.zip",
+          "capture_utc": "20130625100040",
+          "url": "http://www.treasury.gov:80/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_1.zip",
+          "bytes": 62992889,
+          "payload_sha1_base32": "VXOPHJZAVK6GASVBIGHDGJ6SGVTEUTK2",
+          "sha256": "eaf0c1e189d0c351e98a1bf358bdf8da046b2b38829fd180e67e03d2d879bcbe",
+          "replay_url": "https://web.archive.org/web/20130625100040id_/http://www.treasury.gov:80/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_1.zip",
+          "csv_member": "HMP_Public_User_Mod_Data_1_20130417.csv",
+          "columns": 172
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_6.zip",
+          "capture_utc": "20130625095216",
+          "url": "http://www.treasury.gov:80/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_6.zip",
+          "bytes": 129095863,
+          "payload_sha1_base32": "46YU33HSUMJSIQMN7J62NO6X7CXIXRZM",
+          "replay_url": "https://web.archive.org/web/20130625095216id_/http://www.treasury.gov:80/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_6.zip",
+          "sha256": "982e56d860457de2157814b61491fdd34db4ddd9bf960829ebc3f2b1ff21f171",
+          "csv_member": "HMP_Public_User_Mod_Data_6_20130417.csv",
+          "columns": 172
+        },
+        {
+          "file": "HMP_Public_User_Mod_Data_7.zip",
+          "capture_utc": "20130625094834",
+          "url": "http://www.treasury.gov:80/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_7.zip",
+          "bytes": 126227702,
+          "payload_sha1_base32": "JOQ5QSLILA6SER3EYZOWHA3RQFTZYCEZ",
+          "replay_url": "https://web.archive.org/web/20130625094834id_/http://www.treasury.gov:80/initiatives/financial-stability/reports/Reports/HMP_Public_User_Mod_Data_7.zip",
+          "sha256": "1138250b6c54f0dc4bcb536534f5b850faa3a01c8bdfd64f37d0daf06e24ff10",
+          "csv_member": "HMP_Public_User_Mod_Data_7_20130417.csv",
+          "columns": 172
+        }
+      ],
+      "source_profile": {
+        "rows": 3141916,
+        "rows_with_processing_date": 763971,
+        "earliest_processing_date": "2009-11-02",
+        "latest_processing_date": "2013-04-10"
+      },
+      "tier1_by_effective_year": [
+        {
+          "year": 2009,
+          "reference_modifications": 63359,
+          "matched": 39992,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 117,
+          "snapshot_at_or_after_cutoff": 39875,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2010,
+          "reference_modifications": 532484,
+          "matched": 340278,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 678,
+          "snapshot_at_or_after_cutoff": 339600,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2011,
+          "reference_modifications": 339311,
+          "matched": 221414,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 368,
+          "snapshot_at_or_after_cutoff": 221046,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2012,
+          "reference_modifications": 195894,
+          "matched": 125069,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 102,
+          "snapshot_at_or_after_cutoff": 124967,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2013,
+          "reference_modifications": 147264,
+          "matched": 29888,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 25,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 29863,
+          "snapshot_during_month_six": 8249,
+          "earlier_snapshot_with_active_state_and_payment_fields": 24591
+        },
+        {
+          "year": 2014,
+          "reference_modifications": 86433,
+          "matched": 13,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 13,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2015,
+          "reference_modifications": 58369,
+          "matched": 0,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 0,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2016,
+          "reference_modifications": 37189,
+          "matched": 2,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 2,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        },
+        {
+          "year": 2017,
+          "reference_modifications": 13134,
+          "matched": 1,
+          "surplus_matched_source_rows": 0,
+          "conflicting_snapshot": 0,
+          "different_effective_date": 1,
+          "snapshot_at_or_after_cutoff": 0,
+          "snapshot_before_cutoff": 0,
+          "snapshot_during_month_six": 0,
+          "earlier_snapshot_with_active_state_and_payment_fields": 0
+        }
+      ],
+      "tier1_totals": {
+        "reference_modifications": 1473437,
+        "matched": 756657,
+        "surplus_matched_source_rows": 0,
+        "conflicting_snapshot": 0,
+        "different_effective_date": 1306,
+        "snapshot_at_or_after_cutoff": 725488,
+        "snapshot_before_cutoff": 29863,
+        "snapshot_during_month_six": 8249,
+        "earlier_snapshot_with_active_state_and_payment_fields": 24591
+      },
+      "snapshots_before_cutoff_by_partition": {
+        "train": 0,
+        "validation": 29863,
+        "gap": 0,
+        "test": 0
+      }
+    }
+  },
+  "calendar_audit": {
+    "assumption": "Uniform complete follow-up through month 12, with zero reporting delay.",
+    "partitions": [
+      {
+        "partition": "train",
+        "modifications": 1131048,
+        "cutoff_months": 42,
+        "first_cutoff": "2010-01-01",
+        "last_cutoff": "2013-06-01",
+        "first_horizon_end": "2010-07-01",
+        "last_horizon_end": "2013-12-01"
+      },
+      {
+        "partition": "validation",
+        "modifications": 147264,
+        "cutoff_months": 12,
+        "first_cutoff": "2013-07-01",
+        "last_cutoff": "2014-06-01",
+        "first_horizon_end": "2014-01-01",
+        "last_horizon_end": "2014-12-01"
+      },
+      {
+        "partition": "gap",
+        "modifications": 86433,
+        "cutoff_months": 12,
+        "first_cutoff": "2014-07-01",
+        "last_cutoff": "2015-06-01",
+        "first_horizon_end": "2015-01-01",
+        "last_horizon_end": "2015-12-01"
+      },
+      {
+        "partition": "test",
+        "modifications": 108692,
+        "cutoff_months": 36,
+        "first_cutoff": "2015-07-01",
+        "last_cutoff": "2018-06-01",
+        "first_horizon_end": "2016-01-01",
+        "last_horizon_end": "2018-12-01"
+      }
+    ],
+    "adjacent_partition_boundaries": [
+      {
+        "earlier_partition": "train",
+        "later_partition": "validation",
+        "next_cutoff": "2013-07-01",
+        "earlier_modifications": 1131048,
+        "not_mature_by_boundary": 96370,
+        "first_affected_effective_date": "2012-07-01",
+        "last_affected_effective_date": "2012-12-01"
+      },
+      {
+        "earlier_partition": "validation",
+        "later_partition": "test",
+        "next_cutoff": "2015-07-01",
+        "earlier_modifications": 147264,
+        "not_mature_by_boundary": 0,
+        "first_affected_effective_date": null,
+        "last_affected_effective_date": null
+      }
+    ],
+    "loans_in_multiple_analysis_partitions": 0
+  }
+}

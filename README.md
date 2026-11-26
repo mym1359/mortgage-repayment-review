@@ -12,6 +12,7 @@ Reproducible research on U.S. mortgage repayment after loan modification, using 
 - حسابرسی دسترسی زمانی داده‌ها در ماه ششم و پروتکل ارزیابی مدل. The month-six availability audit documents evidence gaps and the proposed evaluation protocol. [پروتکل و نتایج / Protocol and results](docs/research/hamp-asof-protocol.md)
 - کنترل‌های ورود به ارزیابی مدل و بررسی منابع زمان پردازش. Evaluation checks and a review of processing-time sources. [آمادگی داده / Evaluation readiness](docs/research/hamp-evaluation-readiness.md)
 - بازیابی نسخهٔ دسامبر ۲۰۱۶ هامپ و بررسی پوشش آن پیش از برش ماه ششم. Recovery and cutoff audit of the December 2016 release. [گزارش نسخهٔ ۲۰۱۶ / 2016 snapshot audit](docs/research/hamp-december-2016-snapshot.md)
+- بازیابی نسخه‌های منطقه‌ای ۲۰۱۲ و ۲۰۱۳ و بررسی تقویم تفکیک داده. Recovery of 2012 and 2013 regional releases and an audit of the evaluation calendar. [گزارش نسخه‌های قدیمی‌تر / Earlier vintages and calendar](docs/research/hamp-earlier-vintages.md)
 
 کد و گزارش‌های پژوهشی با کمک هوش مصنوعی تهیه شده‌اند. فایل‌های ورودی در سطح وام بیرون از مخزن نگهداری می‌شوند. جزئیات بازتولید و پیوندهای منابع رسمی در گزارش هر مرحله آمده‌اند.
 
