@@ -2,7 +2,7 @@
 
 این پروژه پژوهش بازتولیدپذیر دربارهٔ سابقهٔ بازپرداخت پس از اصلاح وام مسکن را با داده‌های عمومی برنامهٔ هامپ خزانه‌داری آمریکا ثبت می‌کند. واحد تحلیل و محدودیت هر مرحله در گزارش آن آمده است.
 
-This project documents reproducible research on repayment history after U.S. mortgage modifications using public Treasury HAMP data. Each stage report states its unit of analysis and limitations.
+Reproducible research on U.S. mortgage repayment after loan modification, using Treasury HAMP data to audit data quality and reconstruct historical delinquency rates. Each stage report states its unit of analysis and limitations.
 
 ## مراحل پژوهش | Research stages
 
