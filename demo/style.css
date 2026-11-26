@@ -33,7 +33,7 @@ h1 { font: 500 clamp(2.1rem, 5vw, 3.45rem)/1.08 Georgia, serif; letter-spacing: 
 
 .snapshot { border: 0; padding: 0; margin: 0; min-width: 0; }
 .snapshot legend { color: var(--muted); font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
-.segments { display: flex; padding: 3px; gap: 3px; background: #e4ebe5; border-radius: 8px; }
+.segments { display: flex; flex-wrap: wrap; padding: 3px; gap: 3px; background: #e4ebe5; border-radius: 8px; }
 .segments label { position: relative; flex: 1; cursor: pointer; }
 .segments input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .segments label span { display: block; border: 1px solid transparent; border-radius: 5px; padding: .38rem .7rem; font-size: .85rem; white-space: nowrap; font-weight: 700; }
@@ -96,5 +96,6 @@ footer { padding-top: 16px; font-size: .79rem; color: var(--muted); }
   .masthead-inner, .shell { width: calc(100% - 24px); }
   .shell { padding-top: 22px; }
   .summary { grid-template-columns: 1fr; }
+  .segments label span { padding-inline: .45rem; }
   .masthead-inner { min-height: 56px; }
 }

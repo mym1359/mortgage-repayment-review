@@ -13,6 +13,9 @@ const picker = element("case-picker");
 const form = element("decision-form");
 const outcome = element("outcome");
 const notes = element("notes");
+const resolveOutcome = element("resolve-outcome");
+const resolutionPhase = element("resolution-phase");
+const resolutionDate = resolutionPhase.querySelector("input");
 const status = element("save-status");
 const memory = new Map();
 
@@ -39,6 +42,12 @@ function timelineContent(entry) {
     return [
       money(entry.amount) + " payment posted",
       "Applied to the " + date(entry.due) + " installment under " + entry.agreementId,
+    ];
+  }
+  if (entry.type === "confirmation") {
+    return [
+      "Signed agreement confirmation received",
+      "Confirms " + entry.agreementId + " as the controlling modification and withdraws " + entry.otherAgreementId,
     ];
   }
   return [
@@ -82,8 +91,7 @@ function getHistory(key) {
   }
 }
 
-function renderHistory(key) {
-  const history = getHistory(key);
+function renderHistory(history) {
   element("no-decisions").hidden = history.length > 0;
   element("decision-history").replaceChildren(...history.map((record, index) => {
     const item = document.createElement("li");
@@ -95,6 +103,12 @@ function renderHistory(key) {
     const note = document.createElement("p");
     note.textContent = record.notes;
     item.append(label, timestamp, note);
+    if (record.resolution) {
+      const evidenceLink = document.createElement("a");
+      evidenceLink.href = "#" + record.resolution.evidenceId;
+      evidenceLink.textContent = "Evidence " + record.resolution.evidenceId;
+      item.append(evidenceLink);
+    }
     return item;
   }).reverse());
 }
@@ -123,30 +137,55 @@ function renderAgreement(agreement, conflict) {
   sourceLink("agreement-other-source", null);
 }
 
-function renderReferral({ rule, conflict, reversal, reversedPayment }) {
+function renderReferral({ rule, conflict, reversal, reversedPayment, resolutionEvidence, resolution }) {
   const needsReview = conflict.length > 0 || Boolean(reversal);
-  setText("referral-value", needsReview ? "Human review required"
-    : picker.value === "ACS-002" ? "No agreement conflict" : "No reversal referral");
+  let value = needsReview ? "Human review required" : "No reversal referral";
   let detail = "The ledger shows no reversal through this review date.";
-  if (picker.value === "ACS-002") {
-    detail = conflict.length
-      ? "Two signed versions have different monthly amounts and the same effective date. Review both documents to establish which applies."
-      : "Only one signed version applies to the current installment.";
+  let source = reversal?.id;
+  let label = "View reversal evidence";
+  if (resolution) {
+    value = "Agreement conflict resolved";
+    detail = "Reviewer confirmed " + resolution.agreementId + " using " + resolution.id + ".";
+    source = resolution.id;
+    label = "View confirmation";
+  } else if (picker.value === "ACS-002") {
+    if (!needsReview) value = "No agreement conflict";
+    detail = "Only one signed version applies to the current installment.";
+    if (resolutionEvidence) {
+      detail = "A signed confirmation is available. Review it and record a decision to resolve the conflict.";
+      source = resolutionEvidence.id;
+      label = "View confirmation";
+    } else if (conflict.length) {
+      detail = "Two signed versions have different monthly amounts and the same effective date. Review both documents to establish which applies.";
+      source = conflict[0].id;
+      label = "View conflict evidence";
+    }
   } else if (reversal) {
     detail = "The " + date(reversedPayment.due) + " installment was reversed on " + date(reversal.date) + ".";
   }
+  setText("referral-value", value);
   setText("referral-detail", detail);
   element("referral-card").classList.toggle("attention", needsReview);
   setText("rule-version", "Rule " + rule);
-  sourceLink("referral-source", conflict[0]?.id ?? reversal?.id,
-    conflict.length ? "View conflict evidence" : "View reversal evidence");
+  sourceLink("referral-source", source, label);
+}
+
+function reviewResult(history) {
+  const resolution = history.findLast(record => record.resolution)?.resolution;
+  return evaluate(selectedDate(), picker.value, resolution);
 }
 
 function render() {
   const asOf = selectedDate();
   const { title, description, phases } = cases[picker.value];
-  const result = evaluate(asOf, picker.value);
-  const { agreement, conflict, lastPayment, evidence } = result;
+  const history = getHistory(decisionKey());
+  const result = reviewResult(history);
+  const { agreement, conflict, lastPayment, evidence, resolutionEvidence } = result;
+  resolveOutcome.hidden = resolveOutcome.disabled = !resolutionEvidence;
+  if (resolutionEvidence) {
+    const confirmed = evidence.find(entry => entry.id === resolutionEvidence.agreementId);
+    resolveOutcome.textContent = "Resolve conflict · Confirm version " + confirmed.version;
+  }
   setText("case-id", "Case " + picker.value);
   setText("case-title", title);
   setText("case-description", description);
@@ -160,15 +199,25 @@ function render() {
   setText("evidence-caption", "Recorded through " + date(asOf) + " · Newest first");
   renderEvidence(evidence);
   sourceLink("payment-source", lastPayment.id);
-  renderHistory(decisionKey());
+  renderHistory(history);
   status.textContent = "";
 }
 
+function syncDates() {
+  const hasConfirmation = Boolean(cases[picker.value].confirmation);
+  if (!hasConfirmation && resolutionDate.checked) {
+    document.querySelector('input[name="snapshot"][value="after"]').checked = true;
+  }
+  resolutionPhase.hidden = resolutionDate.disabled = !hasConfirmation;
+}
+
+syncDates();
 const drafts = new Map();
 let activeKey = decisionKey();
 
 function switchReview() {
   drafts.set(activeKey, { outcome: outcome.value, notes: notes.value });
+  syncDates();
   activeKey = decisionKey();
   outcome.value = drafts.get(activeKey)?.outcome ?? "";
   notes.value = drafts.get(activeKey)?.notes ?? "";
@@ -191,22 +240,32 @@ form.addEventListener("submit", event => {
     return;
   }
   const key = decisionKey();
-  const records = [...getHistory(key), {
+  const history = getHistory(key);
+  const { resolutionEvidence } = reviewResult(history);
+  const resolving = outcome.value === resolveOutcome.value;
+  if (resolving && !resolutionEvidence) return;
+  const records = [...history, {
     decision: outcome.selectedOptions[0].textContent,
     notes: note,
     savedAt: new Date().toISOString(),
     rule: cases[picker.value].rule,
+    ...(resolving ? { resolution: {
+      evidenceId: resolutionEvidence.id,
+      agreementId: resolutionEvidence.agreementId,
+    } } : {}),
   }];
+  let message;
   try {
     localStorage.setItem(key, JSON.stringify(records));
     memory.delete(key);
-    status.textContent = "Decision saved in this browser.";
+    message = "Decision saved in this browser.";
   } catch {
     memory.set(key, records);
-    status.textContent = "Decision saved for this tab only. Browser storage is unavailable.";
+    message = "Decision saved for this tab only. Browser storage is unavailable.";
   }
   form.reset();
-  renderHistory(key);
+  render();
+  status.textContent = message;
 });
 
 render();

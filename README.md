@@ -22,14 +22,14 @@ The research code and reports were prepared with AI assistance. Loan-level sourc
 
 ## دموی بازبینی آفلاین | Offline reviewer demo
 
-مخزن را دانلود کنید و فایل `demo/index.html` را در مرورگر باز کنید. پرونده را از فهرست انتخاب کنید و دو تاریخ بازبینی را مقایسه کنید.
+مخزن را دانلود کنید و فایل `demo/index.html` را در مرورگر باز کنید. پرونده را از فهرست انتخاب کنید و تاریخ‌های بازبینی آن را مقایسه کنید.
 
-Download the repository and open `demo/index.html` in a browser. Select a case and compare its two review dates.
+Download the repository and open `demo/index.html` in a browser. Select a case and compare its review dates.
 
 | پرونده / Case | سناریو / Scenario |
 | --- | --- |
 | ACS-001 | برگشت پرداخت ژوئن، آخرین قسط تأییدشده را به مه برمی‌گرداند و پرونده را برای بازبینی انسانی علامت می‌زند. / Reversing the June payment makes May the last confirmed installment and flags the case for human review. |
-| ACS-002 | دو نسخهٔ امضاشده مبلغ‌های متفاوتی با تاریخ اجرای یکسان دارند. توافق معتبر و قسط ژوئن تا بازبینی کارشناس معلق می‌مانند و قسط مه همچنان تأییدشده است. / Two signed versions specify different amounts with the same effective date. The applicable agreement and June installment remain unresolved pending human review, while May remains confirmed. |
+| ACS-002 | دو نسخهٔ امضاشده مبلغ‌های متفاوتی با تاریخ اجرای یکسان دارند. توافق معتبر و قسط ژوئن تا بازبینی کارشناس معلق می‌مانند و قسط مه همچنان تأییدشده است. در نمای ۱۷ ژوئن، سند تکمیلی را باز کنید و گزینهٔ تأیید نسخهٔ دوم را با یادداشت ذخیره کنید تا قسط ژوئن دوباره ارزیابی شود. / Two signed versions specify different amounts with the same effective date. The applicable agreement and June installment remain unresolved pending human review, while May remains confirmed. In the June 17 view, open the confirmation and record the decision to confirm version 2 with a note to reassess June. |
 
 پیوندهای شواهد به ردیف‌های خط زمانی می‌رسند. تصمیم و یادداشت به پرونده و تاریخ انتخاب‌شده تعلق دارند. ذخیرهٔ دوباره، اصلاحیه‌ای در سابقه ثبت می‌کند. تصمیم‌ها در صورت دسترسی به حافظهٔ محلی در همان مرورگر و همان مسیر فایل باقی می‌مانند. آزمون قواعد با دستور `node --test demo/review.test.js` اجرا می‌شود.
 

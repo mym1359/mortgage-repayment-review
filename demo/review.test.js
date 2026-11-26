@@ -54,6 +54,42 @@ test("conflicting terms trigger review at signing and retain the last independen
     assert.equal(result.lastPayment.due, "2025-05-01");
     assert.ok(result.evidence.some(entry => entry.id === "PAY-04"));
     assert.equal(result.reversal, undefined);
-    assert.equal(result.rule, "AGR-1 v1.0");
+    assert.equal(result.rule, "AGR-1 v1.1");
   }
+});
+
+const supportedDecision = { evidenceId: "DOC-01", agreementId: "AGR-04" };
+
+test("confirmation only enters the timeline on its recorded date and requires a reviewer decision", () => {
+  const earlier = evaluate("2025-06-15", "ACS-002", supportedDecision);
+  assert.equal(earlier.resolutionEvidence, undefined);
+  assert.equal(earlier.resolution, undefined);
+  assert.equal(earlier.agreement, undefined);
+  assert.ok(!earlier.evidence.some(entry => entry.id === "DOC-01"));
+
+  const received = evaluate("2025-06-16", "ACS-002");
+  assert.equal(received.resolutionEvidence.id, "DOC-01");
+  assert.equal(received.resolution, undefined);
+  assert.equal(received.lastPayment.id, "PAY-03");
+  assert.equal(received.evidence[0].id, "DOC-01");
+});
+
+test("only a decision supported by the confirmation resolves the conflict and recalculates June", () => {
+  for (const decision of [
+    { ...supportedDecision, agreementId: "AGR-05" },
+    { ...supportedDecision, evidenceId: "AGR-04" },
+  ]) {
+    const result = evaluate(snapshots.resolution, "ACS-002", decision);
+    assert.equal(result.agreement, undefined);
+    assert.equal(result.resolution, undefined);
+    assert.equal(result.lastPayment.id, "PAY-03");
+  }
+
+  const result = evaluate(snapshots.resolution, "ACS-002", supportedDecision);
+  assert.equal(result.resolution.id, "DOC-01");
+  assert.equal(result.agreement.id, "AGR-04");
+  assert.deepEqual(result.conflict, []);
+  assert.equal(result.lastPayment.id, "PAY-04");
+  assert.equal(result.lastPayment.amount, result.agreement.installment);
+  assert.ok(result.evidence.some(entry => entry.id === "AGR-05"));
 });
