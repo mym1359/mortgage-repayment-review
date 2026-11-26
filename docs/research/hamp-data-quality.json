@@ -1,0 +1,325 @@
+{
+  "source": {
+    "archive_url": "https://home.treasury.gov/system/files/256/HMP_Govt_Agency_Perf_Data.zip",
+    "listing_url": "https://home.treasury.gov/data/troubled-assets-relief-program/reports/mha-public-file",
+    "data_guide_url": "https://home.treasury.gov/system/files/136/HAMP%20Performance%20Supplemental%20Data%20File%20User%20Guide%20v1.0.pdf",
+    "retrieved_on": "2026-11-27",
+    "archive_bytes": 75367977,
+    "archive_sha256": "c3057bee9c947c3cc5ba39ad83d07d36f2137cc8b9cafe14592ccc6c0247076c",
+    "csv_member": "HMP_Govt_Agency_Perf_Data_20220101_20230201.csv",
+    "csv_uncompressed_bytes": 1110749182,
+    "metadata_rows": 9872074,
+    "metadata_row_count_matches": true
+  },
+  "duckdb_version": "1.5.0",
+  "summary": {
+    "rows": 9872074,
+    "distinct_loans": 1830654,
+    "distinct_modifications": 1889234,
+    "loans_with_multiple_modifications": 58580,
+    "modification_ids_with_multiple_loans": 0
+  },
+  "record_types": [
+    {
+      "record_type": "Modification Information",
+      "rows": 1889234,
+      "distinct_loans": 1830654,
+      "distinct_modifications": 1889234,
+      "missing_loan_id": 0,
+      "missing_modification_id": 0
+    },
+    {
+      "record_type": "Payment Information",
+      "rows": 7982840,
+      "distinct_loans": 596480,
+      "distinct_modifications": 596480,
+      "missing_loan_id": 0,
+      "missing_modification_id": 0
+    }
+  ],
+  "modification_quality": {
+    "earliest_effective_date": "2009-07-01",
+    "latest_effective_date": "2017-12-01",
+    "missing_effective_date": 0,
+    "invalid_effective_date": 0,
+    "missing_program_type": 0,
+    "missing_loan_state": 0,
+    "unexpected_activity_period": 0
+  },
+  "payment_quality": {
+    "earliest_activity": "2022-01-01",
+    "latest_activity": "2023-02-01",
+    "activity_months": 14,
+    "missing_activity_period": 0,
+    "invalid_activity_period": 0,
+    "activity_not_first_of_month": 0,
+    "missing_last_paid_installment_date": 3209482,
+    "invalid_last_paid_installment_date": 0,
+    "missing_reporting_status": 0,
+    "missing_months_after_modification": 0,
+    "invalid_months_after_modification": 0,
+    "activity_rows_at_months_6_through_12": 0,
+    "payment_rows_without_matching_modification": 0
+  },
+  "activity_by_month": [
+    {
+      "activity_date": "2022-01-01",
+      "rows": 596480,
+      "distinct_loans": 596480,
+      "distinct_modifications": 596480
+    },
+    {
+      "activity_date": "2022-02-01",
+      "rows": 591249,
+      "distinct_loans": 591249,
+      "distinct_modifications": 591249
+    },
+    {
+      "activity_date": "2022-03-01",
+      "rows": 586356,
+      "distinct_loans": 586356,
+      "distinct_modifications": 586356
+    },
+    {
+      "activity_date": "2022-04-01",
+      "rows": 580955,
+      "distinct_loans": 580955,
+      "distinct_modifications": 580955
+    },
+    {
+      "activity_date": "2022-05-01",
+      "rows": 576467,
+      "distinct_loans": 576467,
+      "distinct_modifications": 576467
+    },
+    {
+      "activity_date": "2022-06-01",
+      "rows": 572595,
+      "distinct_loans": 572595,
+      "distinct_modifications": 572595
+    },
+    {
+      "activity_date": "2022-07-01",
+      "rows": 568543,
+      "distinct_loans": 568543,
+      "distinct_modifications": 568543
+    },
+    {
+      "activity_date": "2022-08-01",
+      "rows": 565979,
+      "distinct_loans": 565979,
+      "distinct_modifications": 565979
+    },
+    {
+      "activity_date": "2022-09-01",
+      "rows": 563175,
+      "distinct_loans": 563175,
+      "distinct_modifications": 563175
+    },
+    {
+      "activity_date": "2022-10-01",
+      "rows": 560259,
+      "distinct_loans": 560259,
+      "distinct_modifications": 560259
+    },
+    {
+      "activity_date": "2022-11-01",
+      "rows": 558083,
+      "distinct_loans": 558083,
+      "distinct_modifications": 558083
+    },
+    {
+      "activity_date": "2022-12-01",
+      "rows": 556198,
+      "distinct_loans": 556198,
+      "distinct_modifications": 556198
+    },
+    {
+      "activity_date": "2023-01-01",
+      "rows": 554068,
+      "distinct_loans": 554068,
+      "distinct_modifications": 554068
+    },
+    {
+      "activity_date": "2023-02-01",
+      "rows": 552433,
+      "distinct_loans": 552433,
+      "distinct_modifications": 552433
+    }
+  ],
+  "payment_reporting_status": [
+    {
+      "reporting_status": "Not Reported",
+      "rows": 3209482,
+      "missing_last_paid_installment_date": 3209482
+    },
+    {
+      "reporting_status": "Reported",
+      "rows": 4773358,
+      "missing_last_paid_installment_date": 0
+    }
+  ],
+  "modification_cohorts": [
+    {
+      "program_type": "FHA HAMP",
+      "effective_year": 2010,
+      "distinct_modifications": 2545
+    },
+    {
+      "program_type": "FHA HAMP",
+      "effective_year": 2011,
+      "distinct_modifications": 5362
+    },
+    {
+      "program_type": "FHA HAMP",
+      "effective_year": 2012,
+      "distinct_modifications": 6981
+    },
+    {
+      "program_type": "FHA HAMP",
+      "effective_year": 2013,
+      "distinct_modifications": 24322
+    },
+    {
+      "program_type": "FHA HAMP",
+      "effective_year": 2014,
+      "distinct_modifications": 46192
+    },
+    {
+      "program_type": "FHA HAMP",
+      "effective_year": 2015,
+      "distinct_modifications": 32729
+    },
+    {
+      "program_type": "FHA HAMP",
+      "effective_year": 2016,
+      "distinct_modifications": 21994
+    },
+    {
+      "program_type": "FHA HAMP",
+      "effective_year": 2017,
+      "distinct_modifications": 10999
+    },
+    {
+      "program_type": "RD HAMP",
+      "effective_year": 2011,
+      "distinct_modifications": 1
+    },
+    {
+      "program_type": "RD HAMP",
+      "effective_year": 2012,
+      "distinct_modifications": 14
+    },
+    {
+      "program_type": "RD HAMP",
+      "effective_year": 2013,
+      "distinct_modifications": 124
+    },
+    {
+      "program_type": "RD HAMP",
+      "effective_year": 2014,
+      "distinct_modifications": 45
+    },
+    {
+      "program_type": "RD HAMP",
+      "effective_year": 2015,
+      "distinct_modifications": 23
+    },
+    {
+      "program_type": "RD HAMP",
+      "effective_year": 2016,
+      "distinct_modifications": 132
+    },
+    {
+      "program_type": "RD HAMP",
+      "effective_year": 2017,
+      "distinct_modifications": 32
+    },
+    {
+      "program_type": "Streamline HAMP",
+      "effective_year": 2016,
+      "distinct_modifications": 27479
+    },
+    {
+      "program_type": "Streamline HAMP",
+      "effective_year": 2017,
+      "distinct_modifications": 17054
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2009,
+      "distinct_modifications": 63359
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2010,
+      "distinct_modifications": 532484
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2011,
+      "distinct_modifications": 339311
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2012,
+      "distinct_modifications": 195894
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2013,
+      "distinct_modifications": 147264
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2014,
+      "distinct_modifications": 86433
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2015,
+      "distinct_modifications": 58369
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2016,
+      "distinct_modifications": 37189
+    },
+    {
+      "program_type": "Tier 1 HAMP",
+      "effective_year": 2017,
+      "distinct_modifications": 13134
+    },
+    {
+      "program_type": "Tier 2 HAMP",
+      "effective_year": 2012,
+      "distinct_modifications": 1356
+    },
+    {
+      "program_type": "Tier 2 HAMP",
+      "effective_year": 2013,
+      "distinct_modifications": 37328
+    },
+    {
+      "program_type": "Tier 2 HAMP",
+      "effective_year": 2014,
+      "distinct_modifications": 48915
+    },
+    {
+      "program_type": "Tier 2 HAMP",
+      "effective_year": 2015,
+      "distinct_modifications": 58640
+    },
+    {
+      "program_type": "Tier 2 HAMP",
+      "effective_year": 2016,
+      "distinct_modifications": 53305
+    },
+    {
+      "program_type": "Tier 2 HAMP",
+      "effective_year": 2017,
+      "distinct_modifications": 20225
+    }
+  ],
+  "repeated_keys_by_record_type": []
+}
