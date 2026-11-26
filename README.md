@@ -19,3 +19,9 @@ Reproducible research on U.S. mortgage repayment after loan modification, using 
 کد و گزارش‌های پژوهشی با کمک هوش مصنوعی تهیه شده‌اند. فایل‌های ورودی در سطح وام بیرون از مخزن نگهداری می‌شوند. جزئیات بازتولید و پیوندهای منابع رسمی در گزارش هر مرحله آمده‌اند.
 
 The research code and reports were prepared with AI assistance. Loan-level source files are kept outside the repository. Each stage report provides reproduction instructions and direct source links.
+
+## دموی بازبینی آفلاین | Offline reviewer demo
+
+مخزن را دانلود کنید و فایل `demo/index.html` را در مرورگر باز کنید. در پروندهٔ ساختگی، دو تاریخ بازبینی را مقایسه کنید تا ببینید برگشت پرداخت ژوئن چگونه آخرین قسط تأییدشده و وضعیت ارجاع را تغییر می‌دهد. هر نتیجه به ردیف مربوط در خط زمانی متصل است. تصمیم و یادداشت به تاریخ انتخاب‌شده تعلق دارند. ذخیرهٔ دوباره، اصلاحیه‌ای در سابقه ثبت می‌کند. تصمیم‌ها در صورت دسترسی به حافظهٔ محلی در همان مرورگر و همان مسیر فایل باقی می‌مانند. آزمون قواعد با دستور `node --test demo/review.test.js` اجرا می‌شود.
+
+Download the repository and open `demo/index.html` in a browser. Compare the two review dates in the synthetic case to see how the June payment reversal changes the last confirmed installment and referral status. Each finding links to the corresponding timeline entry. Decisions and notes are tied to the selected date. Saving again adds a revision to the history. Decisions persist in the same browser at the same file path when local storage is available. Run the rule checks with `node --test demo/review.test.js`.

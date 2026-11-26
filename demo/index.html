@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An offline mortgage repayment review with a synthetic payment reversal case.">
+  <title>Mortgage Repayment Review</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="review.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <span class="brand">Mortgage Repayment Review</span>
+      <span class="mode">Synthetic case</span>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="case-header" aria-labelledby="case-title">
+      <div>
+        <p class="case-id">Case ACS-001</p>
+        <h1 id="case-title">Payment reversal review</h1>
+        <p class="lede">Compare the repayment record before and after a posted payment was reversed.</p>
+      </div>
+      <fieldset class="snapshot">
+        <legend>Review as of</legend>
+        <div class="segments">
+          <label><input type="radio" name="snapshot" value="before"><span>Jun 11, 2025 <small>Before reversal</small></span></label>
+          <label><input type="radio" name="snapshot" value="after" checked><span>Jun 13, 2025 <small>After reversal</small></span></label>
+        </div>
+      </fieldset>
+    </section>
+
+    <section class="summary" aria-label="Case findings" aria-live="polite">
+      <article class="finding">
+        <h2>Applicable agreement</h2>
+        <p class="value" id="agreement-value"></p>
+        <p class="detail" id="agreement-detail"></p>
+        <a id="agreement-source">View agreement evidence</a>
+      </article>
+      <article class="finding">
+        <h2>Last confirmed installment</h2>
+        <p class="value" id="payment-value"></p>
+        <p class="detail" id="payment-detail"></p>
+        <a id="payment-source">View payment evidence</a>
+      </article>
+      <article class="finding" id="referral-card">
+        <h2>Referral status</h2>
+        <p class="value" id="referral-value"></p>
+        <p class="detail" id="referral-detail"></p>
+        <span id="rule-version" class="rule"></span>
+        <a id="referral-source">View reversal evidence</a>
+      </article>
+    </section>
+
+    <div class="workspace">
+      <section class="panel" id="evidence" aria-labelledby="evidence-title">
+        <div class="panel-heading">
+          <h2 id="evidence-title">Evidence timeline</h2>
+          <p id="evidence-caption"></p>
+        </div>
+        <ol id="timeline" class="timeline"></ol>
+      </section>
+
+      <section class="panel decision" aria-labelledby="decision-title">
+        <div class="panel-heading">
+          <h2 id="decision-title">Reviewer decision</h2>
+          <p>Record a decision for the selected review date.</p>
+        </div>
+        <form id="decision-form">
+          <label for="outcome">Decision</label>
+          <select id="outcome" required>
+            <option value="">Select a decision</option>
+            <option value="confirm-referral">Confirm referral</option>
+            <option value="request-evidence">Request more evidence</option>
+            <option value="close">Close without referral</option>
+          </select>
+          <label for="notes">Review notes</label>
+          <textarea id="notes" rows="4" maxlength="500" required placeholder="Explain the evidence behind your decision."></textarea>
+          <button type="submit">Save decision</button>
+          <p id="save-status" role="status" class="save-status"></p>
+        </form>
+        <div class="history">
+          <h3>Decision history</h3>
+          <p id="no-decisions">No decisions recorded for this date.</p>
+          <ol id="decision-history"></ol>
+        </div>
+      </section>
+    </div>
+    <footer>Offline demo · Decision history stays with this copy of the demo when browser storage is available.</footer>
+  </main>
+  <noscript>Enable JavaScript to use the offline reviewer demo.</noscript>
+</body>
+</html>
