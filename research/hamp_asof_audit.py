@@ -15,7 +15,7 @@ def rows(connection, sql):
     return [dict(zip(columns, row, strict=True)) for row in cursor.fetchall()]
 
 
-def audit(connection):
+def audit(connection, monthly=False):
     connection.execute("""
         CREATE TEMP VIEW tier1 AS
         SELECT loan, modification, effective_date, state, end_date,
@@ -29,7 +29,8 @@ def audit(connection):
     """):
         raise ValueError("Expected one latest Tier 1 row for each modification.")
 
-    by_year = rows(connection, """
+    period = "year, effective_month" if monthly else "year"
+    cohort_rows = rows(connection, f"""
         WITH payments AS (
             SELECT loan, modification, activity_date, reporting, installment_due_date
             FROM historical_archive.historical WHERE kind = 'Payment Information' AND age = 6
@@ -42,7 +43,7 @@ def audit(connection):
                    min(reporting) AS reporting, min(installment_due_date) AS installment_due_date
             FROM payments GROUP BY loan, modification, activity_date
         ), classified AS (
-            SELECT year(t.effective_date) AS year, t.loan,
+            SELECT year(t.effective_date) AS year, t.effective_date AS effective_month, t.loan,
                    last_day(t.month_six) AS cutoff,
                    CASE
                        WHEN t.end_date <= last_day(t.month_six) THEN 'exit_by_cutoff'
@@ -58,7 +59,7 @@ def audit(connection):
             ON p.loan = t.loan AND p.modification = t.modification
                AND p.activity_date = t.month_six
         )
-        SELECT year, count(*) AS modifications, count(DISTINCT loan) AS loans,
+        SELECT {period}, count(*) AS modifications, count(DISTINCT loan) AS loans,
                min(cutoff) AS first_month_six_cutoff, max(cutoff) AS last_month_six_cutoff,
                count(*) FILTER (WHERE disposition = 'exit_by_cutoff') AS retrospective_exit_by_cutoff,
                count(*) FILTER (WHERE disposition = 'no_month_six_row') AS no_month_six_row,
@@ -66,7 +67,7 @@ def audit(connection):
                count(*) FILTER (WHERE disposition = 'no_usable_report') AS no_usable_report,
                count(*) FILTER (WHERE disposition = 'due_after_cutoff') AS due_after_cutoff,
                count(*) FILTER (WHERE disposition = 'reported_proxy') AS reported_proxy
-        FROM classified GROUP BY year ORDER BY year
+        FROM classified GROUP BY {period} ORDER BY {period}
     """)
     revision_checks = rows(connection, """
         WITH older AS (
@@ -90,15 +91,16 @@ def audit(connection):
         "retrospective_exit_by_cutoff", "no_month_six_row", "conflicting_month_six",
         "no_usable_report", "due_after_cutoff", "reported_proxy",
     )
-    for row in by_year:
+    for row in cohort_rows:
         if sum(row[key] for key in categories) != row["modifications"]:
             raise ValueError(f"Inconsistent month-six category totals for {row['year']}.")
+    cohort_key = "by_effective_month" if monthly else "by_effective_year"
     return {
         "cohort": "Tier 1 HAMP permanent modifications",
         "per_record_first_available_timestamp_in_supplied_schema": False,
         "month_six_availability_independently_verified": False,
-        "by_effective_year": by_year,
-        "totals": {key: sum(row[key] for row in by_year) for key in ("modifications", *categories)},
+        cohort_key: cohort_rows,
+        "totals": {key: sum(row[key] for row in cohort_rows) for key in ("modifications", *categories)},
         "snapshot_comparison_to_2023": revision_checks,
     }
 
@@ -107,13 +109,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("historical-db", "monthly-db", "latest-db"):
         parser.add_argument(f"--{name}", type=Path, required=True)
+    parser.add_argument("--monthly", action="store_true")
     args = parser.parse_args()
     with duckdb.connect() as connection:
         connection.execute("SET memory_limit = '2GB'; SET threads = 3")
         attach(connection, "historical_archive", args.historical_db)
         attach(connection, "monthly_archive", args.monthly_db)
         attach(connection, "latest_archive", args.latest_db)
-        result = audit(connection)
+        result = audit(connection, monthly=args.monthly)
     print(json.dumps(result, indent=2, default=str))
 
 

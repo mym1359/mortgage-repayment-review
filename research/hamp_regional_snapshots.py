@@ -31,7 +31,7 @@ def csv_member(path):
         raise ValueError("Expected a CSV or a ZIP containing one CSV.")
 
 
-def audit(manifest_path, source_dir, latest_db, work_dir):
+def audit(manifest_path, source_dir, latest_db, work_dir, monthly=False):
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     capture_times = [datetime.strptime(entry["capture_utc"], "%Y%m%d%H%M%S") for entry in manifest]
     if not manifest or len({capture.date() for capture in capture_times}) != 1:
@@ -80,20 +80,22 @@ def audit(manifest_path, source_dir, latest_db, work_dir):
         """)[0]
         attach(connection, "latest_archive", latest_db)
         has_loan_id, = join_columns
-        yearly = evidence(connection, capture_date, match_loan_id=has_loan_id)
+        cohort_rows = evidence(connection, capture_date, match_loan_id=has_loan_id, monthly=monthly)
 
     partitions = {"train": 0, "validation": 0, "gap": 0, "test": 0}
-    for item in yearly:
+    for item in cohort_rows:
         year = item["year"]
         partition = "train" if year <= 2012 else {2013: "validation", 2014: "gap"}.get(year, "test")
         partitions[partition] += item["snapshot_before_cutoff"]
+    cohort_key = "tier1_by_effective_month" if monthly else "tier1_by_effective_year"
     return {
         "capture_date_utc": capture_date,
         "match_using_archive_loan_and_modification_ids": has_loan_id,
         "sources": sources,
         "source_profile": profile,
-        "tier1_by_effective_year": yearly,
-        "tier1_totals": {key: sum(item[key] for item in yearly) for key in yearly[0] if key != "year"},
+        cohort_key: cohort_rows,
+        "tier1_totals": {key: sum(row[key] for row in cohort_rows) for key in cohort_rows[0]
+                         if key not in {"year", "effective_month"}},
         "snapshots_before_cutoff_by_partition": partitions,
     }
 
@@ -102,8 +104,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("manifest", "source-dir", "latest-db", "work-dir"):
         parser.add_argument(f"--{name}", required=True, type=Path)
+    parser.add_argument("--monthly", action="store_true")
     args = parser.parse_args()
-    print(json.dumps(audit(args.manifest, args.source_dir, args.latest_db, args.work_dir), indent=2, default=str))
+    result = audit(args.manifest, args.source_dir, args.latest_db, args.work_dir, monthly=args.monthly)
+    print(json.dumps(result, indent=2, default=str))
 
 
 if __name__ == "__main__":

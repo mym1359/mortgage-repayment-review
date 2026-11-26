@@ -103,7 +103,7 @@ def stage(connection, source, has_loan_id=True):
     connection.execute("COMMIT")
 
 
-def evidence(connection, capture_date=CAPTURE_DATE, match_loan_id=True):
+def evidence(connection, capture_date=CAPTURE_DATE, match_loan_id=True, monthly=False):
     connection.execute("""
         CREATE TEMP VIEW reference AS
         SELECT loan, modification, effective_date,
@@ -123,6 +123,7 @@ def evidence(connection, capture_date=CAPTURE_DATE, match_loan_id=True):
     """).fetchone()[0]:
         raise ValueError("Modification-only match requires unique IDs across the reference snapshot.")
     loan_condition = "AND s.loan = r.loan" if match_loan_id else ""
+    period = "year, effective_month" if monthly else "year"
     by_year = rows(connection, f"""
         WITH matched AS (
             SELECT r.loan, s.modification, count(*) AS raw_rows,
@@ -136,7 +137,8 @@ def evidence(connection, capture_date=CAPTURE_DATE, match_loan_id=True):
             WHERE s.mode = 'Official Modification'
             GROUP BY r.loan, s.modification
         ), assessed AS (
-            SELECT year(r.effective_date) AS year, m.raw_rows, m.state, m.last_due_date,
+            SELECT year(r.effective_date) AS year, r.effective_date AS effective_month,
+                   m.raw_rows, m.state, m.last_due_date,
                    m.processed_date, r.cutoff,
                    CASE
                      WHEN m.variants IS NULL THEN 'unmatched'
@@ -147,7 +149,7 @@ def evidence(connection, capture_date=CAPTURE_DATE, match_loan_id=True):
                    END AS availability
             FROM reference r LEFT JOIN matched m USING (loan, modification)
         )
-        SELECT year, count(*) AS reference_modifications,
+        SELECT {period}, count(*) AS reference_modifications,
                count(*) FILTER (WHERE raw_rows IS NOT NULL) AS matched,
                coalesce(sum(raw_rows - 1), 0)::BIGINT AS surplus_matched_source_rows,
                count(*) FILTER (WHERE availability = 'conflicting_snapshot') AS conflicting_snapshot,
@@ -162,7 +164,7 @@ def evidence(connection, capture_date=CAPTURE_DATE, match_loan_id=True):
                        AND last_due_date IS NOT NULL AND processed_date IS NOT NULL
                        AND processed_date <= CAST(? AS DATE)
                ) AS earlier_snapshot_with_active_state_and_payment_fields
-        FROM assessed GROUP BY year ORDER BY year
+        FROM assessed GROUP BY {period} ORDER BY {period}
     """, [capture_date, capture_date, capture_date])
     for row in by_year:
         if row["matched"] != sum(row[key] for key in (
@@ -173,7 +175,7 @@ def evidence(connection, capture_date=CAPTURE_DATE, match_loan_id=True):
     return by_year
 
 
-def profile(archive, latest, work_dir):
+def profile(archive, latest, work_dir, monthly=False):
     with archive.open("rb") as handle:
         digest = base64.b32encode(hashlib.file_digest(handle, "sha1").digest()).decode()
         handle.seek(0)
@@ -198,8 +200,10 @@ def profile(archive, latest, work_dir):
             if source_profile["rows"] != expected:
                 raise ValueError("Parsed row count differs from the ZIP metadata.")
             attach(connection, "latest_archive", latest)
-            by_year = evidence(connection)
-    totals = {key: sum(row[key] for row in by_year) for key in by_year[0] if key != "year"}
+            cohort_rows = evidence(connection, monthly=monthly)
+    totals = {key: sum(row[key] for row in cohort_rows) for key in cohort_rows[0]
+              if key not in {"year", "effective_month"}}
+    cohort_key = "tier1_by_effective_month" if monthly else "tier1_by_effective_year"
     return {
         "capture_utc": CAPTURE,
         "archive_bytes": archive.stat().st_size,
@@ -209,7 +213,7 @@ def profile(archive, latest, work_dir):
         "csv_uncompressed_bytes": csv_member.file_size,
         "metadata_rows": expected,
         "source_profile": source_profile,
-        "tier1_by_effective_year": by_year,
+        cohort_key: cohort_rows,
         "tier1_totals": totals,
     }
 
@@ -221,14 +225,15 @@ def main():
     source.add_argument("--warc", type=Path)
     parser.add_argument("--latest-db", required=True, type=Path)
     parser.add_argument("--work-dir", required=True, type=Path)
+    parser.add_argument("--monthly", action="store_true")
     args = parser.parse_args()
     if args.warc:
         with tempfile.TemporaryDirectory(dir=args.work_dir) as temp:
             archive = Path(temp) / "source.zip"
             extract_warc(args.warc, archive)
-            result = profile(archive, args.latest_db, args.work_dir)
+            result = profile(archive, args.latest_db, args.work_dir, monthly=args.monthly)
     else:
-        result = profile(args.archive, args.latest_db, args.work_dir)
+        result = profile(args.archive, args.latest_db, args.work_dir, monthly=args.monthly)
     print(json.dumps(result, indent=2, default=str))
 
 
