@@ -14,6 +14,8 @@ A search of the original Treasury addresses for 2009–2018 identified a candida
 
 [نمایهٔ نسخهٔ نامزد دسامبر ۲۰۱۶ / December 2016 candidate capture](https://web.archive.org/web/20161216030203id_/http://mhadatafile.treasury.gov/Prod/reports/HMP_Public_User_Mod_Data_All.zip) · [فهرست رسمی داده‌ها / Official data listing](https://home.treasury.gov/data/troubled-assets-relief-program/reports/mha-public-file) · [گزارش‌های تجمیعی / Aggregate reports](https://home.treasury.gov/data/troubled-assets-relief-program/reports/making-home-affordable-program-performance-report)
 
+این فایل در مرحلهٔ بعد بازیابی و بررسی شد. The next stage recovered and audited this file. [گزارش نسخهٔ دسامبر ۲۰۱۶ / December 2016 snapshot audit](hamp-december-2016-snapshot.md)
+
 ## کنترل‌های ورود به ارزیابی | Evaluation checks
 
 اعتبارسنج دو فایل فراداده را بررسی می‌کند. برش پایان ماه ششم در ورودی برابر با ابتدای ماه هفتم است. این مرز در ویژگی‌ها انحصاری و در پنجرهٔ پیامد فراگیر است. پایان پنجره ابتدای ماه سیزدهم است. زمان‌ها با آفست صریح ثبت و بر اساس لحظهٔ واقعی مقایسه می‌شوند.

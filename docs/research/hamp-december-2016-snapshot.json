@@ -1,0 +1,136 @@
+{
+  "capture_utc": "2016-12-16T03:02:03Z",
+  "archive_bytes": 858396013,
+  "archive_sha256": "e4439053801776a4404c3b9b32e1306c8e08aef2eaf191f96c218c67ddf2a293",
+  "archive_payload_sha1_base32": "S7YAOKBAH7R3A4XTVEZ4URDF7ER6LXDE",
+  "csv_member": "HMP_Public_User_Mod_Data_All_20161117.csv",
+  "csv_uncompressed_bytes": 6361361771,
+  "metadata_rows": 6843629,
+  "source_profile": {
+    "rows": 6843629,
+    "rows_with_processing_date": 1764243,
+    "earliest_processing_date": "2009-11-02",
+    "latest_processing_date": "2016-11-10"
+  },
+  "tier1_by_effective_year": [
+    {
+      "year": 2009,
+      "reference_modifications": 63359,
+      "matched": 63288,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 80,
+      "snapshot_at_or_after_cutoff": 63208,
+      "snapshot_before_cutoff": 0,
+      "snapshot_during_month_six": 0,
+      "earlier_snapshot_with_active_state_and_payment_fields": 0
+    },
+    {
+      "year": 2010,
+      "reference_modifications": 532484,
+      "matched": 531950,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 79,
+      "snapshot_at_or_after_cutoff": 531871,
+      "snapshot_before_cutoff": 0,
+      "snapshot_during_month_six": 0,
+      "earlier_snapshot_with_active_state_and_payment_fields": 0
+    },
+    {
+      "year": 2011,
+      "reference_modifications": 339311,
+      "matched": 338936,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 39,
+      "snapshot_at_or_after_cutoff": 338897,
+      "snapshot_before_cutoff": 0,
+      "snapshot_during_month_six": 0,
+      "earlier_snapshot_with_active_state_and_payment_fields": 0
+    },
+    {
+      "year": 2012,
+      "reference_modifications": 195894,
+      "matched": 195581,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 137,
+      "snapshot_at_or_after_cutoff": 195444,
+      "snapshot_before_cutoff": 0,
+      "snapshot_during_month_six": 0,
+      "earlier_snapshot_with_active_state_and_payment_fields": 0
+    },
+    {
+      "year": 2013,
+      "reference_modifications": 147264,
+      "matched": 146786,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 112,
+      "snapshot_at_or_after_cutoff": 146674,
+      "snapshot_before_cutoff": 0,
+      "snapshot_during_month_six": 0,
+      "earlier_snapshot_with_active_state_and_payment_fields": 0
+    },
+    {
+      "year": 2014,
+      "reference_modifications": 86433,
+      "matched": 85627,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 136,
+      "snapshot_at_or_after_cutoff": 85491,
+      "snapshot_before_cutoff": 0,
+      "snapshot_during_month_six": 0,
+      "earlier_snapshot_with_active_state_and_payment_fields": 0
+    },
+    {
+      "year": 2015,
+      "reference_modifications": 58369,
+      "matched": 57217,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 76,
+      "snapshot_at_or_after_cutoff": 57141,
+      "snapshot_before_cutoff": 0,
+      "snapshot_during_month_six": 0,
+      "earlier_snapshot_with_active_state_and_payment_fields": 0
+    },
+    {
+      "year": 2016,
+      "reference_modifications": 37189,
+      "matched": 31290,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 44,
+      "snapshot_at_or_after_cutoff": 19601,
+      "snapshot_before_cutoff": 11645,
+      "snapshot_during_month_six": 2876,
+      "earlier_snapshot_with_active_state_and_payment_fields": 9820
+    },
+    {
+      "year": 2017,
+      "reference_modifications": 13134,
+      "matched": 0,
+      "surplus_matched_source_rows": 0,
+      "conflicting_snapshot": 0,
+      "different_effective_date": 0,
+      "snapshot_at_or_after_cutoff": 0,
+      "snapshot_before_cutoff": 0,
+      "snapshot_during_month_six": 0,
+      "earlier_snapshot_with_active_state_and_payment_fields": 0
+    }
+  ],
+  "tier1_totals": {
+    "reference_modifications": 1473437,
+    "matched": 1450675,
+    "surplus_matched_source_rows": 0,
+    "conflicting_snapshot": 0,
+    "different_effective_date": 703,
+    "snapshot_at_or_after_cutoff": 1438327,
+    "snapshot_before_cutoff": 11645,
+    "snapshot_during_month_six": 2876,
+    "earlier_snapshot_with_active_state_and_payment_fields": 9820
+  }
+}
