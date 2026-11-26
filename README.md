@@ -14,6 +14,7 @@ Reproducible research on U.S. mortgage repayment after loan modification, using 
 - بازیابی نسخهٔ دسامبر ۲۰۱۶ هامپ و بررسی پوشش آن پیش از برش ماه ششم. Recovery and cutoff audit of the December 2016 release. [گزارش نسخهٔ ۲۰۱۶ / 2016 snapshot audit](docs/research/hamp-december-2016-snapshot.md)
 - بازیابی نسخه‌های منطقه‌ای ۲۰۱۲ و ۲۰۱۳ و بررسی تقویم تفکیک داده. Recovery of 2012 and 2013 regional releases and an audit of the evaluation calendar. [گزارش نسخه‌های قدیمی‌تر / Earlier vintages and calendar](docs/research/hamp-earlier-vintages.md)
 - پوشش ماهانه پس از اصلاح مرز آموزش و اعتبارسنجی. Monthly coverage after revising the training-to-validation boundary. [گزارش و جدول پوشش / Coverage report and table](docs/research/hamp-monthly-evaluation-coverage.md)
+- وضعیت پژوهش و مشخصات نمونهٔ زمان‌دار مورد نیاز. Research status and the remaining source-evidence requirements. [وضعیت و پیش‌نویس استعلام / Status and draft inquiry](docs/research/hamp-research-status.md)
 
 کد و گزارش‌های پژوهشی با کمک هوش مصنوعی تهیه شده‌اند. فایل‌های ورودی در سطح وام بیرون از مخزن نگهداری می‌شوند. جزئیات بازتولید و پیوندهای منابع رسمی در گزارش هر مرحله آمده‌اند.
 
