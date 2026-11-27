@@ -44,7 +44,7 @@ def month_boundary(value):
     return value.day == 1 and value.time() == time(0)
 
 
-def cohort_metadata(cohort, issues):
+def cohort_metadata(cohort, issues, require_all_splits):
     examples = {}
     loans = {}
     split_counts = Counter()
@@ -88,19 +88,21 @@ def cohort_metadata(cohort, issues):
         first_cutoff[split] = min(first_cutoff.get(split, cutoff), cutoff)
         last_label[split] = max(last_label.get(split, available), available)
 
-    for split in SPLITS:
-        if not split_counts[split]:
-            issues[f"empty_{split}_split"] += 1
-    for earlier, later in zip(SPLITS, SPLITS[1:]):
+    if require_all_splits:
+        for split in SPLITS:
+            if not split_counts[split]:
+                issues[f"empty_{split}_split"] += 1
+    splits_to_compare = SPLITS if require_all_splits else [split for split in SPLITS if split_counts[split]]
+    for earlier, later in zip(splits_to_compare, splits_to_compare[1:]):
         if earlier in last_label and later in first_cutoff:
             if last_label[earlier] >= first_cutoff[later]:
                 issues[f"{earlier}_labels_overlap_{later}_cutoff"] += 1
     return examples, split_counts, outcome_counts
 
 
-def evaluate(cohort, features):
+def evaluate(cohort, features, *, require_all_splits=True):
     issues = Counter()
-    examples, split_counts, outcome_counts = cohort_metadata(cohort, issues)
+    examples, split_counts, outcome_counts = cohort_metadata(cohort, issues, require_all_splits)
     feature_examples = set()
     feature_rows = 0
     for row in features:
