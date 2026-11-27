@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>نمونهٔ اولیهٔ منطق تصمیم در ACS-002</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #edf2f1; color: #182d2a; font: 1rem/1.75 Tahoma, Arial, sans-serif; }
+    main { max-width: 63rem; margin: auto; padding: clamp(1rem, 4vw, 3rem); }
+    header { border-block-start: .35rem solid #186454; padding-block-start: .8rem; }
+    h1, h2, p { margin-block: 0 .55rem; }
+    h1 { font-size: clamp(1.55rem, 4vw, 2.5rem); line-height: 1.5; }
+    h2 { font-size: 1.12rem; }
+    section { background: white; border: 1px solid #cad9d5; padding: clamp(.85rem, 3vw, 1.4rem); margin-block-start: 1rem; border-radius: .75rem; }
+    dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: .7rem; margin: .8rem 0; }
+    dl div { background: #f1f6f4; padding: .6rem .8rem; border-radius: .4rem; }
+    dt, small { color: #415e57; }
+    dd { margin: 0; font-weight: 700; }
+    ol { padding-inline-start: 1.4rem; margin-block: .35rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: .55rem; }
+    button { font: inherit; color: #114d40; background: #fff; border: 1px solid #497a70; border-radius: .45rem; padding: .35rem .7rem; cursor: pointer; }
+    button[aria-selected="true"], #walk-next, button[data-action="confirm"] { background: #186454; border-color: #186454; color: white; }
+    button:focus-visible { outline: .18rem solid #186454; outline-offset: .18rem; }
+    button:disabled { opacity: .6; cursor: default; }
+    #feedback { padding: .5rem .7rem; background: #e2efe9; border-inline-start: .2rem solid #186454; margin-block-start: .8rem; }
+    #document { margin-block: .5rem; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <small>نمونهٔ اولیه · دادهٔ ساختگی</small>
+      <h1>منطق تصمیم پروندهٔ <bdi>ACS-002</bdi></h1>
+      <p>آیا دریافت <bdi>DOC-01</bdi> کافی است، یا قسط ژوئن فقط پس از ثبت تصمیم کارشناس تأیید می‌شود؟ نماهای ۱۳ و ۱۷ ژوئن را مقایسه کنید. با بارگذاری دوبارهٔ صفحه، این نمونه از ابتدا شروع می‌شود.</p>
+    </header>
+
+    <section aria-labelledby="state-title">
+      <h2 id="state-title">وضعیت پرونده</h2>
+      <dl>
+        <div><dt>تاریخ بازبینی</dt><dd id="date"></dd></div>
+        <div><dt>توافق معتبر</dt><dd id="agreement"></dd></div>
+        <div><dt>سند تکمیلی</dt><dd id="evidence"></dd></div>
+        <div><dt>آخرین قسط تأییدشده</dt><dd id="payment"></dd></div>
+        <div><dt>وضعیت قسط ژوئن</dt><dd id="june"></dd></div>
+        <div><dt>وضعیت بازبینی</dt><dd id="review"></dd></div>
+      </dl>
+      <p id="document" hidden><bdi>DOC-01</bdi> در ۱۶ ژوئن دریافت شد. نسخهٔ دوم (<bdi>AGR-04</bdi>) را معتبر می‌داند و نسخهٔ سوم (<bdi>AGR-05</bdi>) را پس می‌گیرد.</p>
+      <h2>سابقهٔ تصمیم در این نما</h2>
+      <p id="empty">در این تاریخ تصمیمی ثبت نشده است.</p>
+      <ol id="history"></ol>
+      <p id="feedback" role="status"></p>
+    </section>
+
+    <section aria-labelledby="free-title">
+      <h2 id="free-title">آزمون آزاد</h2>
+      <div class="actions" id="free">
+        <button type="button" data-action="early">نمای ۱۳ ژوئن</button>
+        <button type="button" data-action="later">نمای ۱۷ ژوئن</button>
+        <button type="button" data-action="open">بازکردن <bdi>DOC-01</bdi></button>
+        <button type="button" data-action="confirm">ثبت تأیید نسخهٔ دوم</button>
+        <button type="button" data-action="revise">ثبت اصلاحیه</button>
+        <button type="button" data-action="reset">شروع دوباره</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="guide-title">
+      <h2 id="guide-title">مسیرهای راهنما</h2>
+      <div class="actions" role="tablist" aria-label="سناریوها">
+        <button type="button" role="tab" id="tab-arrival" aria-controls="walk-panel" aria-selected="true" data-scenario="arrival">دریافت سند</button>
+        <button type="button" role="tab" id="tab-save" aria-controls="walk-panel" aria-selected="false" tabindex="-1" data-scenario="save">تصمیم و اصلاحیه</button>
+        <button type="button" role="tab" id="tab-early" aria-controls="walk-panel" aria-selected="false" tabindex="-1" data-scenario="early">مرز تاریخ بازبینی</button>
+      </div>
+      <div id="walk-panel" role="tabpanel" aria-labelledby="tab-arrival">
+        <p id="walk-description"></p>
+        <p id="walk-result"></p>
+        <div class="actions">
+          <button type="button" id="walk-next"></button>
+          <button type="button" id="walk-reset">شروع دوبارهٔ مسیر</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Case evaluation embedded from the project demo for offline use. -->
+  <script>
+"use strict";
+
+const mortgageReview = (() => {
+  // All amounts are integer cents, and dates are date-only ISO strings.
+  const agreements = [
+    { id: "AGR-01", version: 1, signed: "2025-03-01", effective: "2025-04-01", installment: 140000 },
+    { id: "AGR-02", version: 2, signed: "2025-04-24", effective: "2025-05-01", installment: 125000 },
+  ];
+  const events = [
+    { id: "PAY-01", type: "payment", date: "2025-05-03", due: "2025-05-01", agreementId: "AGR-02", amount: 125000 },
+    { id: "PAY-02", type: "payment", date: "2025-06-05", due: "2025-06-01", agreementId: "AGR-02", amount: 125000 },
+    { id: "REV-01", type: "reversal", date: "2025-06-12", paymentId: "PAY-02", amount: 125000 },
+  ];
+  const snapshots = { before: "2025-06-11", after: "2025-06-13", resolution: "2025-06-17" };
+  const cases = {
+    "ACS-001": {
+      title: "Payment reversal review",
+      rule: "REV-1 v1.0",
+      description: "Compare the repayment record before and after a posted payment was reversed.",
+      phases: { before: "Before reversal", after: "After reversal" },
+      agreements,
+      events,
+    },
+    "ACS-002": {
+      title: "Agreement conflict review",
+      rule: "AGR-1 v1.1",
+      description: "Review two competing signed modifications and confirm which applies when supporting evidence arrives.",
+      phases: { before: "Before conflict", after: "After conflict" },
+      agreements: [
+        { id: "AGR-03", version: 1, signed: "2025-03-11", effective: "2025-04-01", installment: 155000 },
+        { id: "AGR-04", version: 2, signed: "2025-05-22", effective: "2025-06-01", installment: 135000 },
+        { id: "AGR-05", version: 3, signed: "2025-06-12", effective: "2025-06-01", installment: 145000 },
+      ],
+      confirmation: { id: "DOC-01", type: "confirmation", date: "2025-06-16",
+        agreementId: "AGR-04", otherAgreementId: "AGR-05" },
+      events: [
+        { id: "PAY-03", type: "payment", date: "2025-05-05", due: "2025-05-01", agreementId: "AGR-03", amount: 155000 },
+        { id: "PAY-04", type: "payment", date: "2025-06-05", due: "2025-06-01", agreementId: "AGR-04", amount: 135000 },
+      ],
+    },
+  };
+  const byLatestDate = (a, b) => b.date.localeCompare(a.date);
+
+  function agreementAt(visibleAgreements, due, resolution) {
+    const eligible = visibleAgreements
+      .filter(agreement => agreement.effective <= due)
+      .sort((a, b) => b.effective.localeCompare(a.effective) || b.version - a.version);
+    const latest = eligible[0];
+    if (!latest) return { agreement: undefined, conflict: [] };
+    const candidates = eligible.filter(agreement => agreement.effective === latest.effective);
+    const conflict = candidates.some(agreement => agreement.installment !== latest.installment)
+      ? candidates
+      : [];
+    if (!conflict.length) return { agreement: latest, conflict };
+    const confirmed = conflict.find(agreement => agreement.id === resolution?.agreementId);
+    return { agreement: confirmed, conflict: confirmed ? [] : conflict };
+  }
+
+  function evaluate(asOf, caseId = "ACS-001", decision) {
+    const selected = cases[caseId];
+    const visibleAgreements = selected.agreements.filter(agreement => agreement.signed <= asOf);
+    const visibleEvents = selected.events.filter(event => event.date <= asOf);
+    const unresolved = agreementAt(visibleAgreements, asOf);
+    const confirmation = selected.confirmation?.date <= asOf ? selected.confirmation : undefined;
+    const resolutionEvidence = confirmation && [confirmation.agreementId, confirmation.otherAgreementId]
+      .every(id => unresolved.conflict.some(agreement => agreement.id === id))
+      ? confirmation
+      : undefined;
+    const resolution = resolutionEvidence && decision?.evidenceId === resolutionEvidence.id
+      && decision.agreementId === resolutionEvidence.agreementId ? resolutionEvidence : undefined;
+    const { agreement, conflict } = resolution
+      ? agreementAt(visibleAgreements, asOf, resolution)
+      : unresolved;
+    const reversals = visibleEvents.filter(event => event.type === "reversal");
+    const lastPayment = visibleEvents
+      .filter(event => {
+        if (event.type !== "payment" || event.due > asOf) return false;
+        const { agreement } = agreementAt(visibleAgreements, event.due, resolution);
+        const reversed = reversals
+          .filter(reversal => reversal.paymentId === event.id)
+          .reduce((total, reversal) => total + reversal.amount, 0);
+        return agreement?.id === event.agreementId && event.amount - reversed >= agreement.installment;
+      })
+      .sort((a, b) => b.due.localeCompare(a.due) || byLatestDate(a, b))[0];
+    const reversal = reversals.sort(byLatestDate)[0];
+    return {
+      agreement,
+      conflict,
+      resolutionEvidence,
+      resolution,
+      lastPayment,
+      reversal,
+      reversedPayment: visibleEvents.find(event => event.id === reversal?.paymentId),
+      evidence: [
+        ...visibleAgreements.map(agreement => ({ ...agreement, type: "agreement", date: agreement.signed })),
+        ...visibleEvents,
+        ...(confirmation ? [confirmation] : []),
+      ].sort(byLatestDate),
+      rule: selected.rule,
+    };
+  }
+
+  return { cases, evaluate, snapshots };
+})();
+  </script>
+  <script>
+    const decisionModel = (() => {
+      const early = mortgageReview.snapshots.after;
+      const later = mortgageReview.snapshots.resolution;
+      const initial = () => ({ date: early, opened: false, records: {}, message: "بازبینی از ۱۳ ژوئن شروع می‌شود." });
+      const recordsAt = state => state.records[state.date] ?? [];
+      const findings = state => mortgageReview.evaluate(state.date, "ACS-002", recordsAt(state).at(-1));
+
+      function transition(state, action) {
+        if (action === "reset") return initial();
+        if (action === "early" || action === "later") {
+          const date = action === "early" ? early : later;
+          return { ...state, date, opened: false, message: "تاریخ بازبینی تغییر کرد." };
+        }
+
+        const { resolutionEvidence } = findings(state);
+        if (!resolutionEvidence) {
+          return { ...state, message: "سند در این تاریخ در دسترس نیست و تصمیمی ثبت نشد." };
+        }
+        if (action === "open") {
+          return { ...state, opened: true, message: "سند باز شد. بازکردن سند به‌تنهایی وضعیت قسط را تغییر نمی‌دهد." };
+        }
+
+        const records = recordsAt(state);
+        if (action === "revise" && records.length === 0) {
+          return { ...state, message: "برای ثبت اصلاحیه، ابتدا تصمیم اولیه را ثبت کنید." };
+        }
+        if (action === "confirm" && records.length > 0) {
+          return { ...state, message: "تصمیم اولیه ثبت شده است. برای افزودن یادداشت، اصلاحیه ثبت کنید." };
+        }
+
+        const note = action === "revise"
+          ? "اصلاحیه: تاریخ دریافت سند ۱۶ ژوئن و تاریخ ثبت پرداخت ۵ ژوئن است."
+          : "نسخهٔ دوم بر اساس سند امضاشده تأیید شد.";
+        const record = { evidenceId: resolutionEvidence.id, agreementId: resolutionEvidence.agreementId, note };
+        return {
+          ...state,
+          records: { ...state.records, [state.date]: [...records, record] },
+          message: action === "revise" ? "اصلاحیه به سابقه افزوده شد." : "تصمیم ثبت شد و قسط ژوئن تأیید شد.",
+        };
+      }
+
+      return { initial, findings, recordsAt, transition, later };
+    })();
+  </script>
+  <script>
+    const id = name => document.getElementById(name);
+    const scenarios = {
+      arrival: {
+        description: "ورود سند و اثر بازکردن آن را در دو تاریخ مقایسه کنید.",
+        steps: [["open", "در ۱۳ ژوئن سند را باز کنید"], ["later", "به ۱۷ ژوئن بروید"], ["open", "سند را باز کنید"]],
+        result: "سند در ۱۷ ژوئن قابل بررسی است و قسط ژوئن همچنان معلق است.",
+      },
+      save: {
+        description: "ببینید ثبت تصمیم چگونه قسط ژوئن را تأیید می‌کند و اصلاحیه چگونه به سابقه اضافه می‌شود.",
+        steps: [["later", "به ۱۷ ژوئن بروید"], ["open", "سند را باز کنید"], ["confirm", "تأیید را ثبت کنید"], ["revise", "اصلاحیه را ثبت کنید"]],
+        result: "آخرین قسط تأییدشده، قسط ژوئن است و هر دو ثبت در سابقه دیده می‌شوند.",
+      },
+      early: {
+        description: "تأیید در تاریخ فاقد سند را امتحان کنید، سپس اثر تصمیم ۱۷ ژوئن را بر نمای قبلی بررسی کنید.",
+        steps: [["confirm", "در ۱۳ ژوئن تأیید را امتحان کنید"], ["later", "به ۱۷ ژوئن بروید"], ["open", "سند را باز کنید"], ["confirm", "تأیید را ثبت کنید"], ["early", "به ۱۳ ژوئن برگردید"]],
+        result: "نمای ۱۳ ژوئن همچنان قسط مه را نشان می‌دهد و سابقهٔ تصمیم آن خالی است.",
+      },
+    };
+    let state = decisionModel.initial();
+    let scenario = "arrival";
+    let step = 0;
+    const tabs = [...document.querySelectorAll("[data-scenario]")];
+    const currency = new Intl.NumberFormat("fa-IR", { maximumFractionDigits: 2 });
+    const amount = cents => currency.format(cents / 100) + " دلار";
+    const number = new Intl.NumberFormat("fa-IR");
+
+    function render() {
+      const result = decisionModel.findings(state);
+      const june = result.lastPayment.due === "2025-06-01";
+      id("date").textContent = state.date === decisionModel.later ? "۱۷ ژوئن ۲۰۲۵" : "۱۳ ژوئن ۲۰۲۵";
+      id("agreement").textContent = result.agreement
+        ? "نسخهٔ دوم · " + amount(result.agreement.installment) + " در ماه"
+        : "حل‌نشده · نسخهٔ دوم " + amount(135000) + "، نسخهٔ سوم " + amount(145000);
+      id("evidence").textContent = result.resolutionEvidence ? "دریافت‌شده در ۱۶ ژوئن" : "هنوز دریافت نشده";
+      id("payment").textContent = (june ? "۱ ژوئن" : "۱ مه") + " · " + amount(result.lastPayment.amount);
+      id("june").textContent = june ? "تأیید شد · پرداخت ثبت‌شده در ۵ ژوئن" : "در انتظار تصمیم کارشناس";
+      id("review").textContent = result.resolution ? "تعارض حل شد" : "نیازمند بررسی انسانی";
+      id("document").hidden = !state.opened;
+      const records = decisionModel.recordsAt(state);
+      id("empty").hidden = records.length > 0;
+      id("history").replaceChildren(...records.map((record, index) => {
+        const item = document.createElement("li");
+        const evidence = document.createElement("bdi");
+        evidence.textContent = record.evidenceId;
+        item.append(index ? "ثبت " + number.format(index + 1) + " · " : "تصمیم اولیه · ", record.note + " · ", evidence);
+        return item;
+      }));
+      id("feedback").textContent = state.message;
+    }
+
+    function renderGuide() {
+      const walk = scenarios[scenario];
+      const done = step === walk.steps.length;
+      id("walk-description").textContent = walk.description;
+      id("walk-result").textContent = done ? walk.result : "";
+      id("walk-next").disabled = done;
+      id("walk-next").textContent = done ? "مسیر کامل شد" : number.format(step + 1) + ". " + walk.steps[step][1];
+    }
+
+    function startGuide(selected) {
+      scenario = selected;
+      step = 0;
+      state = decisionModel.initial();
+      for (const tab of tabs) {
+        const active = tab.dataset.scenario === scenario;
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
+      }
+      id("walk-panel").setAttribute("aria-labelledby", "tab-" + scenario);
+      render();
+      renderGuide();
+    }
+
+    for (const tab of tabs) {
+      tab.addEventListener("click", () => startGuide(tab.dataset.scenario));
+      tab.addEventListener("keydown", event => {
+        const index = tabs.indexOf(tab);
+        const targets = { ArrowLeft: index + 1, ArrowRight: index - 1, Home: 0, End: tabs.length - 1 };
+        if (!Object.hasOwn(targets, event.key)) return;
+        event.preventDefault();
+        const target = tabs[(targets[event.key] + tabs.length) % tabs.length];
+        startGuide(target.dataset.scenario);
+        target.focus();
+      });
+    }
+
+    id("free").addEventListener("click", event => {
+      const button = event.target.closest("[data-action]");
+      if (!button) return;
+      if (step !== 0 || button.dataset.action !== "reset") {
+        step = 0;
+        renderGuide();
+      }
+      state = decisionModel.transition(state, button.dataset.action);
+      render();
+    });
+    id("walk-next").addEventListener("click", () => {
+      if (step === 0) state = decisionModel.initial();
+      state = decisionModel.transition(state, scenarios[scenario].steps[step][0]);
+      step += 1;
+      render();
+      renderGuide();
+    });
+    id("walk-reset").addEventListener("click", () => startGuide(scenario));
+    startGuide(scenario);
+  </script>
+</body>
+</html>
