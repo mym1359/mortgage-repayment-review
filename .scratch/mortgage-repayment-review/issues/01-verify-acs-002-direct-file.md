@@ -1,6 +1,6 @@
 # 01. آزمون مستقیم فایل دمو برای ACS-002 | Verify ACS-002 from the local file
 
-Status: ready-for-human
+Status: resolved
 
 Blocked by: None
 
@@ -12,9 +12,9 @@ Verify offline demo acceptance by opening the local file directly in a browser t
 
 ## معیارهای پذیرش | Acceptance criteria
 
-- [ ] در نمای ۱۳ ژوئن، `DOC-01` در دسترس نیست، توافق حل‌نشده است و قسط مه آخرین قسط تأییدشده است. / On June 13, `DOC-01` is unavailable, the agreement is unresolved, and May is the last confirmed installment.
-- [ ] در نمای ۱۷ ژوئن، `DOC-01` در دسترس است و قسط ژوئن تا ثبت تأیید نسخهٔ دوم همراه با یادداشت معلق می‌ماند. پس از ثبت، قسط ۱ ژوئن به مبلغ ۱٬۳۵۰ دلار تأیید می‌شود. / On June 17, `DOC-01` is available and June remains pending until the reviewer saves the version 2 confirmation with a note. Saving confirms the $1,350 June 1 installment.
-- [ ] اصلاحیه ثبت شود. پس از بستن مرورگر و بازکردن همان فایل با `file://` در همان پروفایل، تصمیم اولیه و اصلاحیه با ارجاع به سند بازیابی شوند. در نمای ۱۳ ژوئن همچنان مه آخرین قسط تأییدشده باشد. / Save a revision. After closing the browser and reopening the identical `file://` path in the same profile, verify that both entries and their evidence references persist and that May remains the last confirmed installment on June 13.
+- [x] در نمای ۱۳ ژوئن، `DOC-01` در دسترس نیست، توافق حل‌نشده است و قسط مه آخرین قسط تأییدشده است. / On June 13, `DOC-01` is unavailable, the agreement is unresolved, and May is the last confirmed installment.
+- [x] در نمای ۱۷ ژوئن، `DOC-01` در دسترس است و قسط ژوئن تا ثبت تأیید نسخهٔ دوم همراه با یادداشت معلق می‌ماند. پس از ثبت، قسط ۱ ژوئن به مبلغ ۱٬۳۵۰ دلار تأیید می‌شود. / On June 17, `DOC-01` is available and June remains pending until the reviewer saves the version 2 confirmation with a note. Saving confirms the $1,350 June 1 installment.
+- [x] اصلاحیه ثبت شود. پس از بستن مرورگر و بازکردن همان فایل با `file://` در همان پروفایل، تصمیم اولیه و اصلاحیه با ارجاع به سند بازیابی شوند. در نمای ۱۳ ژوئن همچنان مه آخرین قسط تأییدشده باشد. / Save a revision. After closing the browser and reopening the identical `file://` path in the same profile, verify that both entries and their evidence references persist and that May remains the last confirmed installment on June 13.
 - [x] نسخهٔ مرورگر، نتیجه و محدودیت‌های آزمون مستقیم ثبت شوند. / Record the browser version, outcome, and any limitations of the direct-file run.
 
 [مشخصات پروژه / Project spec](../spec.md)
@@ -30,3 +30,9 @@ The decision prototype in Chromium over `localhost` showed that opening `DOC-01`
 بازآزمایی در Chromium نسخهٔ `156.0.8078.79` برای مسیر مستقیم دمو خطای `ERR_BLOCKED_BY_ADMINISTRATOR` داد و فایل بارگیری نشد. سه معیار رفتاری اجرای مستقیم باز می‌مانند و به مرورگری با دسترسی مجاز به فایل‌های محلی نیاز دارند.
 
 Retesting the original demo's direct file path in Chromium `156.0.8078.79` returned `ERR_BLOCKED_BY_ADMINISTRATOR` before page load. The three direct-file behavior checks remain open and require a browser that permits local-file navigation.
+
+آزمون مستقیم فایل در Chromium نسخهٔ `151.0.7922.34` روی ماشین GitHub Actions موفق شد. برای `ACS-002`، قسط ژوئن در نمای ۱۷ ژوئن تا ثبت تأیید نسخهٔ دوم با استناد به `DOC-01` معلق ماند. ثبت تصمیم قسط را تأیید کرد. پس از بستن Chromium و بازکردن همان مسیر `file://` در همان پروفایل، تصمیم و اصلاحیه با ارجاع به سند بازیابی شدند. در نمای ۱۳ ژوئن، مه آخرین قسط تأییدشده باقی ماند. سیاست مرورگر مدیریت‌شدهٔ Codex Cloud همچنان مسیر مستقیم را در آن محیط مسدود می‌کند.
+
+The direct-file acceptance run passed in Chromium `151.0.7922.34` on a GitHub Actions runner. In `ACS-002`, the June installment remained pending on June 17 until the reviewer confirmed version 2 using `DOC-01`. Saving confirmed June. Closing Chromium and reopening the identical `file://` path with the same profile restored both history entries and their evidence references. June 13 still showed May as the last confirmed installment. The managed Codex Cloud browser still blocks direct file navigation in that environment.
+
+[اجرای آزمون / Acceptance run](https://github.com/mym1359/mortgage-repayment-review/actions/runs/45979028992)
