@@ -18,3 +18,11 @@ Verify offline demo acceptance by opening the local file directly in a browser t
 - [ ] نسخهٔ مرورگر، نتیجه و محدودیت‌های آزمون مستقیم ثبت شوند. / Record the browser version, outcome, and any limitations of the direct-file run.
 
 [مشخصات پروژه / Project spec](../spec.md)
+
+## Comments
+
+نمونهٔ اولیهٔ منطق تصمیم در Chromium روی `localhost` نشان داد که بازکردن `DOC-01` قسط ژوئن را معلق می‌گذارد. ثبت تأیید نسخهٔ دوم قسط را در نمای ۱۷ ژوئن تأیید می‌کند و اصلاحیه به سابقهٔ همان نما افزوده می‌شود. نمای ۱۳ ژوئن همچنان قسط مه را نشان می‌دهد. نمونه تصمیم‌ها را در حافظه نگه می‌دارد. آزمون ماندگاری دموی اصلی با `file://` باز است.
+
+The decision prototype in Chromium over `localhost` showed that opening `DOC-01` leaves the June installment pending. Saving the version 2 decision confirms June in the June 17 view, and a revision appends to that view's history. June 13 still shows May. The prototype keeps decisions in memory. Direct-file persistence in the original demo remains open.
+
+[نمونهٔ اولیه / Prototype](https://github.com/mym1359/mortgage-repayment-review/blob/3ecb10ae2d215db66870285020bb41eadf0e4b4c/demo/prototype-acs-002-decision.html)
