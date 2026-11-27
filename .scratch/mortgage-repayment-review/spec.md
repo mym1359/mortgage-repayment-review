@@ -18,9 +18,9 @@ The aggregate research is reproducible. The audited public sources did not estab
 
 The actionable slice is to prepare and validate an authorized timestamped sample. The researcher traces activity month, version, and availability for each input back to source evidence. The output is an aggregate report with input counts, violations, cases missing evidence, and a documented decision on whether evaluation can proceed. Preserve the existing research reports and source evidence for independent reproduction.
 
-پس از تأیید داده، ارزیابی تاریخی در سطح وام طبق پروتکل زمان‌دار انجام می‌شود. دموی پیشنهادی بازبینی انسانی مسیر محصول برای مرحله‌ای بعدی است. اولین سناریوی پیشنهادی، اصلاح قرارداد و برگشت یکی از پرداخت‌هاست و با دادهٔ ساختگی اجرا می‌شود. تصمیم‌گیر پرونده کارشناس است.
+پس از تأیید داده، ارزیابی تاریخی در سطح وام طبق پروتکل زمان‌دار انجام می‌شود. دموی آفلاین بازبینی انسانی با دادهٔ ساختگی، برگشت پرداخت در `ACS-001` و تعارض نسخه‌های امضاشدهٔ توافق در `ACS-002` را پوشش می‌دهد. کارشناس وضعیت پرونده را در تاریخ بازبینی می‌بیند و با استناد به شواهد تصمیم می‌گیرد.
 
-After source approval, evaluate the historical loan-level outcome under the time-aware protocol. The proposed human-review demo is a later product slice. Its proposed first scenario uses synthetic data for a contract modification followed by a payment reversal. The reviewer makes the case decision.
+After source approval, evaluate the historical loan-level outcome under the time-aware protocol. The offline human-review demo uses synthetic data to cover a payment reversal in `ACS-001` and conflicting signed agreements in `ACS-002`. The reviewer sees the case as of the selected review date and uses the evidence to make a decision.
 
 ## داستان‌های کاربر | User Stories
 
@@ -81,18 +81,40 @@ After source approval, evaluate the historical loan-level outcome under the time
 19. به‌عنوان مالک پروژه، می‌خواهم فقط کد، مستندات و آمار تجمیعی منتشر شوند تا ریزداده و مکاتبات خصوصی بیرون از مخزن بمانند.
 
     As a project owner, I want publication limited to code, documentation, and aggregate evidence so that raw data and private correspondence stay outside the repository.
-20. به‌عنوان کارشناس در دموی پیشنهادی، می‌خواهم نسخهٔ معتبر توافق و شواهد تأیید آن را در تاریخ بررسی ببینم تا علت انتخاب نسخه روشن باشد.
+20. به‌عنوان کارشناس در دمو، می‌خواهم نسخهٔ معتبر توافق و شواهد تأیید آن را در تاریخ بررسی ببینم تا علت انتخاب نسخه روشن باشد.
 
-    As a reviewer in the proposed demo, I want the applicable agreement and its supporting evidence as of the review date so that I can explain the version selected.
-21. به‌عنوان کارشناس در دموی پیشنهادی، می‌خواهم آخرین قسط کاملِ اعمال‌شده و برگشت‌های پرداخت را ببینم تا پرداخت برگشتی را در نتیجهٔ پرونده لحاظ کنم.
+    As a reviewer in the demo, I want the applicable agreement and its supporting evidence as of the review date so that I can explain the version selected.
+21. به‌عنوان کارشناس در دمو، می‌خواهم آخرین قسط کاملِ اعمال‌شده و برگشت‌های پرداخت را ببینم تا پرداخت برگشتی را در نتیجهٔ پرونده لحاظ کنم.
 
-    As a reviewer in the proposed demo, I want to see the last full applied installment and payment reversals so that I can account for reversals in the case result.
-22. به‌عنوان کارشناس در دموی پیشنهادی، می‌خواهم تعارض قرارداد، اعتراض، رویداد تکراری یا برگشت وجه همراه با دلیل و نسخهٔ قاعده ارجاع شود تا بررسی قابل پیگیری باشد.
+    As a reviewer in the demo, I want to see the last full applied installment and payment reversals so that I can account for reversals in the case result.
+22. به‌عنوان کارشناس در دمو، می‌خواهم تعارض توافق یا برگشت پرداخت همراه با دلیل و نسخهٔ قاعده ارجاع شود تا بررسی قابل پیگیری باشد.
 
-    As a reviewer in the proposed demo, I want agreement conflicts, disputes, repeated events, and reversals referred with a reason and rule version so that the review is traceable.
-23. به‌عنوان کارشناس در دموی پیشنهادی، می‌خواهم نتیجهٔ بررسی و اصلاحیه ثبت شود تا سابقهٔ تصمیم‌گیری و تغییرات قابل بازبینی بماند.
+    As a reviewer in the demo, I want agreement conflicts and payment reversals flagged for review with a reason and rule version so that the review is traceable.
+23. به‌عنوان کارشناس در دمو، می‌خواهم نتیجهٔ بررسی و اصلاحیه ثبت شود تا سابقهٔ تصمیم‌گیری و تغییرات قابل بازبینی بماند.
 
-    As a reviewer in the proposed demo, I want the decision and any correction recorded so that the review history can be audited.
+    As a reviewer in the demo, I want the decision and any correction recorded so that the review history can be audited.
+
+24. به‌عنوان کارشناس، می‌خواهم نمای ۱۳ ژوئن پروندهٔ `ACS-002` هر دو نسخهٔ متعارض را نشان دهد تا بدانم چرا آخرین قسط تأییدشده مربوط به مه است.
+
+    As a reviewer, I want the June 13 view of `ACS-002` to show both competing versions so that I can see why May remains the last confirmed installment.
+25. به‌عنوان کارشناس، می‌خواهم در نمای ۱۷ ژوئن سند `DOC-01` را از خط زمانی باز کنم تا پیش از انتخاب نسخهٔ دوم، مدرک امضاشده را بررسی کنم.
+
+    As a reviewer, I want to open `DOC-01` from the timeline in the June 17 view so that I can examine the signed evidence before choosing version 2.
+26. به‌عنوان کارشناس، می‌خواهم پرونده تا زمان ثبت تصمیم مستند در وضعیت بررسی بماند تا دریافت سند به‌تنهایی قسط ژوئن را تأیید نکند.
+
+    As a reviewer, I want the case to remain pending until I save a documented decision so that receipt of evidence alone cannot confirm the June installment.
+27. به‌عنوان کارشناس، می‌خواهم پس از تأیید نسخهٔ دوم، آخرین قسط تأییدشده همراه با سررسید، مبلغ و تاریخ ثبت پرداخت به‌روز شود تا بتوانم نتیجه را با دفتر پرداخت تطبیق دهم.
+
+    As a reviewer, I want the last confirmed installment to update with its due date, amount, and posting date after I confirm version 2 so that I can reconcile the result with the payment ledger.
+28. به‌عنوان کارشناس، می‌خواهم اصلاحیه در کنار تصمیم اولیه و با پیوند به سند ثبت شود تا سابقهٔ بررسی حفظ شود.
+
+    As a reviewer, I want the revision recorded alongside the original decision with a link to the evidence so that I can audit the review history.
+29. به‌عنوان کارشناس، می‌خواهم پس از بازکردن دوبارهٔ همان نسخهٔ محلی دمو در همان پروفایل مرورگر، هر دو ثبت را ببینم تا سابقهٔ بررسی را بازیابی کنم.
+
+    As a reviewer, I want to see both entries after reopening the same local copy of the demo in the same browser profile so that I can recover the review history.
+30. به‌عنوان کارشناس، می‌خواهم تصمیم ۱۷ ژوئن بر نمای ۱۳ ژوئن اثر نگذارد تا بتوانم آنچه در تاریخ قبلی قابل احراز بود بازبینی کنم.
+
+    As a reviewer, I want the June 17 decision to leave the June 13 view intact so that I can review what could be established on the earlier date.
 
 ## تصمیم‌های پیاده‌سازی | Implementation Decisions
 
@@ -102,7 +124,8 @@ After source approval, evaluate the historical loan-level outcome under the time
 - **تفکیک.** ژوئیهٔ ۲۰۰۹ تا ژوئن ۲۰۱۲ برای آموزش، نیمهٔ دوم ۲۰۱۲ حذف تقویمی، ۲۰۱۳ برای اعتبارسنجی، ۲۰۱۴ فاصله و ۲۰۱۵ تا ۲۰۱۷ برای آزمون در نظر گرفته می‌شوند. اولین برش اعتبارسنجی ۱ ژوئیهٔ ۲۰۱۳ است. آخرین زمان دسترسی به برچسب‌های بخش قبلی باید پیش از اولین برش بخش بعد باشد. اگر شواهد تأخیر نشان دهند، دامنهٔ آموزش دوباره محدود می‌شود.
 - **ردیابی و انتشار.** مدارک منبع، ریزداده و مکاتبات بیرون از مخزن می‌مانند. هر مرحلهٔ بررسی‌شده با شرح تغییر، شواهد و محدودیت‌ها در یک کامیت ثبت می‌شود. خروجی عمومی شامل دادهٔ تجمیعی و مشخصات بازتولید است.
 - **ارزیابی مشروط.** پس از احراز منبع و تأیید پوشش، ابتدا خط پایهٔ سادهٔ ماه ششم و سپس روش زمان‌گسسته با روند پرداخت و وضعیت گزارش بررسی می‌شود. انتخاب ویژگی و تنظیم مدل در آموزش و اعتبارسنجی انجام می‌شود و آزمون نهایی قفل می‌ماند. معیارهای پیشنهادی طرح، از جمله امتیاز بریر، پیش از باز کردن آزمون تثبیت می‌شوند. آستانهٔ بهبود یا نتیجهٔ مدل هنوز تعیین یا مشاهده نشده است.
-- **طرح پیشنهادی دمو.** قرارداد نسخه‌دار، دفتر رویداد پرداخت و گردش ارجاع انسانی می‌توانند با دادهٔ ساختگی پیاده شوند. خروجی پرونده باید با تاریخ بررسی، دلیل، شواهد و نسخهٔ قاعده قابل توضیح باشد. تأیید دامنهٔ دمو، پیش‌نیاز شروع پیاده‌سازی آن است.
+- **دموی بازبینی.** نتیجهٔ پرونده از نسخه‌های توافق، رویدادهای دفتر پرداخت و شواهد موجود تا تاریخ بازبینی به دست می‌آید. در `ACS-002`، نسخه‌های دوم و سوم تاریخ اجرای یکسان و مبلغ‌های متفاوت دارند. سند `DOC-01` که ۱۶ ژوئن دریافت شد، `AGR-04` (نسخهٔ دوم) را معتبر می‌داند و `AGR-05` (نسخهٔ سوم) را پس می‌گیرد. ثبت تأیید نسخهٔ دوم همراه با یادداشت، قسط ۱ ژوئن به مبلغ ۱٬۳۵۰ دلار را در نمای ۱۷ ژوئن تأیید می‌کند.
+- **سابقهٔ تصمیم.** ثبت دوباره، اصلاحیه‌ای به سابقه اضافه می‌کند. هر ثبت به پرونده و تاریخ بازبینی تعلق دارد و تصمیم حل تعارض، مرجع سند را حفظ می‌کند. بازیابی پس از بازکردن دوباره به ذخیره‌سازی مرورگر وابسته است. در صورت در دسترس نبودن آن، رابط اعلام می‌کند که ثبت فقط در همان زبانه می‌ماند.
 
 - **Current slice.** Feed an authorized sample into the existing metadata validation interface. Verify source provenance and active status before conversion. Passing metadata consistency alone does not establish origin or completeness.
 - **Identity and time.** IDs support joins and partitioning. The feature cutoff is the exclusive start of month seven. Record explicit offsets, and require feature event and availability times before cutoff. A due date is distinct from the time a payment occurred or posted.
@@ -110,30 +133,35 @@ After source approval, evaluate the historical loan-level outcome under the time
 - **Partitioning.** Train on July 2009–June 2012, hold out the second half of 2012, validate on 2013, leave a 2014 gap, and test on 2015–2017. The first validation cutoff is July 1, 2013. Earlier labels must be available before the next partition's first cutoff. Move the training boundary earlier if actual availability requires it.
 - **Traceability and publication.** Keep source records, microdata, and correspondence outside the repository. Record each verified stage in a commit with what changed, the evidence, and remaining limitations. Publish aggregate results and reproduction instructions.
 - **Conditional evaluation.** Once provenance and coverage are established, compare a simple month-six baseline with a discrete-time model using payment and reporting history. Select features and tune with training and validation only and keep the test locked. Finalize proposed metrics, including the Brier score, before opening the test. No improvement threshold or evaluation result has been approved or observed.
-- **Proposed demo.** Synthetic data can exercise versioned agreements, a payment event ledger, and human referral. The result must explain the review date, reason, evidence, and rule version. Implementation depends on agreement on the demo scope.
+- **Review demo.** Versioned agreements, payment ledger events, and evidence available by the review date determine the case findings. In `ACS-002`, versions 2 and 3 share an effective date and have different amounts. `DOC-01`, received June 16, establishes `AGR-04` (version 2) as applicable and withdraws `AGR-05` (version 3). Saving the version 2 confirmation with a note confirms the $1,350 June 1 installment in the June 17 view.
+- **Decision history.** Saving again appends a revision. Each entry is scoped to its case and review date, and a conflict resolution keeps the evidence reference. Restoration after reopening depends on browser storage. When it is unavailable, the interface reports that the entry stays in the current tab.
 
 ## تصمیم‌های آزمون | Testing Decisions
 
 - سطح اصلی آزمون مسیر پژوهش از ورودی نمونه و شواهد آن تا وضعیت خروج و گزارش تجمیعی است. از ورودی اعتبارسنج موجود استفاده کنید و جزئیات داخلی SQL و ترتیب فراخوانی‌ها را در آزمون تثبیت نکنید. آزمون‌های ساختگی موجودِ مرز زمانی، تکرار شناسه و زمان برچسب، سابقهٔ این روش هستند.
 - پذیرش قطعهٔ فعلی نیازمند نتیجهٔ قابل توضیح برای ورودی معتبر، ورودی نامعتبر و شاهد ناقص است. ورودی یا برچسب دیررس، نشت شناسه میان بخش‌ها، منفی زودرس، یا نسخهٔ فاقد تأیید منبع باید در گزارش به‌روشنی مشخص شود. در خروجی عمومی شناسهٔ پرونده نمایش داده نمی‌شود.
 - اجرای مجدد بازسازی عمومی باید همان ۳۰ سلول و جدول ۱۰۲ گروه ماهانه را تولید کند. اختلاف ماه دوازدهم گروه دوم در سال ۲۰۱۷ باید در گزارش قابل مشاهده بماند. راستی‌آزمایی دادهٔ عمومی و آزمون ساختگی، معیارهای پذیرش مستقل دارند.
-- اگر دامنهٔ دمو تأیید شود، آزمون از دید کارشناس بررسی کند که پس از برگشت پرداخت، نسخهٔ معتبر توافق، آخرین قسط قطعی و علت ارجاع با شواهد درست نمایش داده می‌شوند. موارد تعارض، اعتراض و رویداد تکراری را هم در همین سطح بسنجید.
+- آزمون پذیرش دمو از رابط مرورگر انجام می‌شود. در `ACS-002` نماهای ۱۳ و ۱۷ ژوئن را پیش از ثبت مقایسه کنید، `DOC-01` را باز کنید، تصمیم و اصلاحیه را ثبت کنید و پس از بستن مرورگر و بازکردن دوباره از همان مسیر، سابقه را بررسی کنید. در مقایسهٔ این دو نما، قسط ژوئن فقط در نمای ۱۷ ژوئن و پس از ثبت تصمیم باید تأیید شود. برای پذیرش اجرای آفلاین، دمو را مستقیماً از مسیر فایل محلی باز کنید. آزمون‌های موجود قواعد، منطق تاریخ شواهد و برگشت پرداخت را از طریق رابط ارزیابی پرونده می‌سنجند.
 
 - Test the research slice at its external boundary, from sample and evidence intake to exit status and aggregate report. Use the existing validator interface and avoid pinning SQL internals or call order. Existing synthetic tests of time boundaries, identity separation, and label timing are the precedent.
 - Acceptance of the current slice requires an explainable result for valid input, invalid input, and insufficient evidence. The report identifies late inputs or labels, identity overlap, premature negatives, and unverified source versions. Published output contains no case identifiers.
 - Re-running public reconstruction should yield the same 30 cells and 102 monthly cohorts. The unresolved Tier 2 month-twelve difference for 2017 remains visible. Public-data verification and synthetic controls have independent acceptance checks.
-- If the demo is approved, test the reviewer-visible result after a reversal. Verify that the applicable agreement, last confirmed installment, and referral reason are backed by the right evidence. Test agreement conflicts, disputes, and repeated events at the same boundary.
+- Run demo acceptance through the browser UI. In `ACS-002`, compare June 13 and June 17 before saving, open `DOC-01`, save a decision and a revision, then close the browser and reopen the same path to check the history. Of these two views, only June 17 should confirm the June installment, and only after saving the decision. Offline acceptance requires opening the demo directly from its local file path. The existing rule suite exercises evidence dates and payment reversals through the case evaluation interface.
 
 ## خارج از دامنه | Out of Scope
 
-آموزش یا آزمون مدل با ریزدادهٔ فاقد شواهد زمانی، تصمیم اعتباری یا اقدام وصول خودکار، تماس با وام‌گیرنده، ورود دادهٔ مشتری به مخزن، استقرار عملیاتی، پایلوت با شریک و ادعا دربارهٔ بهبود وصول یا انطباق مقرراتی خارج از دامنهٔ کار فعلی‌اند.
+آموزش یا آزمون مدل با ریزدادهٔ فاقد شواهد زمانی، تصمیم اعتباری یا اقدام وصول خودکار، تماس با وام‌گیرنده، ورود دادهٔ مشتری به مخزن، استقرار عملیاتی، پایلوت با شریک و ادعا دربارهٔ بهبود وصول یا انطباق مقرراتی خارج از دامنهٔ کار فعلی‌اند. سناریوهای اعتراض و رویداد تکراری در این مرحلهٔ دمو پوشش داده نمی‌شوند.
 
-Model development or testing with unverified timing, automated credit or collection actions, borrower contact, customer data in the repository, production deployment, a partner pilot, and claims of improved recovery or regulatory compliance are outside the current scope.
+Model development or testing with unverified timing, automated credit or collection actions, borrower contact, customer data in the repository, production deployment, a partner pilot, and claims of improved recovery or regulatory compliance are outside the current scope. Dispute and repeated-event scenarios are outside this demo slice.
 
 ## یادداشت‌های تکمیلی | Further Notes
 
 برچسب آمادگی این سند برای کارهای مشخص‌شدهٔ آماده‌سازی و راستی‌آزمایی است. ارزیابی مدل به دریافت شاهد بیرونی وابسته است. تا زمان تدوین این سند، نمونهٔ مناسب برای اثبات زمان دسترسی دریافت نشده بود. اگر منبع تنها بخشی از زمان‌ها را تأیید کند، نتیجهٔ نمونه باید با همان دامنه گزارش شود.
 
 The readiness label covers the specified preparation and verification work. Model evaluation depends on external source evidence. At drafting, no suitable timestamped sample had been received. If a source verifies only some timestamps, report the sample result with that limited scope.
+
+در کامیت `296882d`، نتیجهٔ هر ۱۶ آزمون خودکار موفق بود. در آزمون Chromium از طریق `localhost`، تصمیم و اصلاحیه پس از بستن و بازکردن دوباره در همان پروفایل باقی ماندند و قسط ژوئن فقط در نمای ۱۷ ژوئن پس از ثبت تصمیم تأیید شد. سیاست محیط اجرای مستقیم `file://` را مسدود کرد. بررسی ماندگاری از مسیر مستقیم فایل همچنان در انتظار اجراست.
+
+At commit `296882d`, all 16 automated tests passed. In Chromium over `localhost`, the decision and revision persisted after closing and reopening with the same profile, and June was confirmed only in the June 17 view after saving. The environment blocked direct `file://` navigation. Persistence when opening the file directly still needs verification.
 
 [گزارش وضعیت پژوهش / Research status](../../docs/research/hamp-research-status.md) · [پروتکل زمان‌دار / Time-aware protocol](../../docs/research/hamp-asof-protocol.md) · [جدول پوشش / Coverage](../../docs/research/hamp-monthly-evaluation-coverage.md) · [اعتبارسنج فراداده / Metadata checks](../../docs/research/hamp-evaluation-readiness.md) · [بازسازی تاریخی / Historical reconstruction](../../docs/research/hamp-historical-reconstruction.md)
