@@ -4,6 +4,10 @@
 
 Reproducible research on U.S. mortgage repayment after loan modification, using Treasury HAMP data to audit data quality and reconstruct historical delinquency rates. Each stage report states its unit of analysis and limitations.
 
+## شروع بازبینی | Start here
+
+[نسخه‌های انتشار / Releases](https://github.com/mym1359/mortgage-repayment-review/releases) · [خلاصهٔ پروژه / Project brief](docs/evaluation/project-brief.md) · [پروتکل ارزیابی مستقل / Independent evaluation protocol](docs/evaluation/protocol.md)
+
 ## مراحل پژوهش | Research stages
 
 - مرحلهٔ صفر، آزمایش نرخ‌های گروه‌های سالانه با دادهٔ تجمیعی. Phase zero benchmarks annual-cohort rates with published aggregates. [روش و دستور اجرا / Method and run instructions](research/phase_zero/README.md)
@@ -25,6 +29,10 @@ The research code and reports were prepared with AI assistance. Loan-level sourc
 مخزن را دانلود کنید و فایل `demo/index.html` را در مرورگر باز کنید. پرونده را از فهرست انتخاب کنید و تاریخ‌های بازبینی آن را مقایسه کنید.
 
 Download the repository and open `demo/index.html` in a browser. Select a case and compare its review dates.
+
+اگر مرورگر سازمانی مسیر مستقیم فایل را مسدود می‌کند، از ریشهٔ مخزن `python -m http.server 8765 --bind 127.0.0.1` را اجرا و `http://127.0.0.1:8765/demo/index.html` را باز کنید. برای بررسی ماندگاری در این روش، نشانی و پروفایل مرورگر را ثابت نگه دارید.
+
+If a managed browser blocks direct file navigation, run `python -m http.server 8765 --bind 127.0.0.1` from the repository root and open `http://127.0.0.1:8765/demo/index.html`. Use the same URL and browser profile to check restoration in this setup.
 
 | پرونده / Case | سناریو / Scenario |
 | --- | --- |
